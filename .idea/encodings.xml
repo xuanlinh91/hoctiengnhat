@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/application/controllers/admin/cms.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/blog.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/home.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/models/form_validation/validation_rules.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/about.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/admin/vwAddCourseKanji.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/admin/vwAddNewCMS.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/admin/vwEditCMS.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/admin/vwEditCourseKanji.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourse.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourseKanji.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourseVolca.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/blog_template.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/course.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/home.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/kanji.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/share/footer.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/share/header.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/share/header_backup.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/share/right_column.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/js/admin.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/js/upload.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/system/language/english/form_validation_lang.php" charset="UTF-8" />
+    <file url="PROJECT" charset="windows-1252" />
+  </component>
 </project>

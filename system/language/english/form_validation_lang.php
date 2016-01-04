@@ -37,6 +37,35 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//$lang['form_validation_required']		= 'Trường {field} không được để trống.';
+//$lang['form_validation_isset']			= 'Trường {field} chưa có giá trị.';
+//$lang['form_validation_valid_email']		= 'Trường {field} : Địa chỉ email không hợp lệ.';
+//$lang['form_validation_valid_emails']		= 'Trường {field} : Có chứa dịa chỉ email không hợp lệ.';
+//$lang['form_validation_valid_url']		= 'Trường {field} : Địa chỉ URL không hợp lệ.';
+//$lang['form_validation_valid_ip']		= 'The {field} field must contain a valid IP.';
+//$lang['form_validation_min_length']		= 'Trường {field} phải có ít nhất {param} ký tự.';
+//$lang['form_validation_max_length']		= 'Trường {field} chỉ có thể chứa tối đa {param} ký tự.';
+//$lang['form_validation_exact_length']		= 'Trường {field} bắt buộc phải có {param} ký tự.';
+//$lang['form_validation_alpha']			= 'Trường {field} chỉ có thể nhập chữ cái.';
+//$lang['form_validation_alpha_numeric']		= 'Trường {field} chỉ có thể nhập chữ cái và số.';
+//$lang['form_validation_alpha_numeric_spaces']	= 'Trường {field} chỉ có thể nhập chữ cái, khoảng trắng và số.';
+//$lang['form_validation_alpha_dash']		= 'Trường {field} chỉ có thể nhập chữ cái, số, dấu gạch dưới và dấu gạch chéo.';
+//$lang['form_validation_numeric']		= 'Trường {field} chỉ có thể nhập chữ số.';
+//$lang['form_validation_is_numeric']		= 'Trường {field} chỉ có thể nhập chữ số.';
+//$lang['form_validation_integer']		= 'Trường {field} chỉ có thể nhập chữ số nguyên';
+//$lang['form_validation_regex_match']		= 'Trường {field} nhập chưa đúng định dạng';
+//$lang['form_validation_matches']		= 'The {field} field does not match the {param} field.';
+//$lang['form_validation_differs']		= 'The {field} field must differ from the {param} field.';
+//$lang['form_validation_is_unique'] 		= 'Trường {field} phải nhập giá trị duy nhất';
+//$lang['form_validation_is_natural']		= 'Trường {field} chỉ có thể nhập số tự nhiên';
+//$lang['form_validation_is_natural_no_zero']	= 'Trường {field} chỉ có thể nhập số tự nhiên lớn hơn 0';
+//$lang['form_validation_decimal']		= 'Trường {field} chỉ có thể nhập số thực';
+//$lang['form_validation_less_than']		= 'Trường {field} phải chứa số nhỏ hơn {param}.';
+//$lang['form_validation_less_than_equal_to']	= 'Trường {field} phải chứa số nhỏ hơn hoặc bằng {param}.';
+//$lang['form_validation_greater_than']		= 'Trường {field} phải chứa số lớn hơn {param}.';
+//$lang['form_validation_greater_than_equal_to']	= 'Trường {field} phải chứa số lớn hơn hoặc bằng {param}.';
+//$lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your field name {field}.';
+//$lang['form_validation_in_list']		= 'The {field} field must be one of: {param}.';
 $lang['form_validation_required']		= 'The {field} field is required.';
 $lang['form_validation_isset']			= 'The {field} field must have a value.';
 $lang['form_validation_valid_email']		= 'The {field} field must contain a valid email address.';

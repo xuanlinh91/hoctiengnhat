@@ -20,11 +20,22 @@ class MY_Controller extends CI_Controller
     public function set_page_title($title = '')
     {
         if (!empty($title)) {
-            $this->page_title = $title . PREFIX_SUB_PAGE . SUB_PAGE;
+            $this->page_title = $title;
         } else {
             $title = "Home page";
-            $this->page_title = $title . PREFIX_SUB_PAGE . SUB_PAGE;
+            $this->page_title = $title;
         }
+    }
+
+    public function noti($text, $result = 'error', $flagCode = 1)
+    {
+        if ($result == 'success') {
+            $this->session->set_userdata('type_mess_code', SUCCESS_CLASS);
+        } else {
+            $this->session->set_userdata('type_mess_code', ERROR_CLASS);
+        }
+        $this->session->set_userdata('error_flag_code', $flagCode);
+        $this->session->set_userdata('error_mess_code', $text);
     }
 
     /**
@@ -60,8 +71,8 @@ class MY_Controller extends CI_Controller
             if ($is_tracking) {
                 $layout_data['is_tracking'] = true;
             }
-
-            $this->load->view("main", $layout_data);
+            echo $content;
+//            $this->load->view("main", $layout_data);
         } else {
             $this->session->set_userdata('type_mess_code', ERROR_CLASS);
             $this->session->set_userdata('error_flag_code', 1);

@@ -89,7 +89,25 @@ define('HIRAGANA', 1); // highest automatically-assigned error code
 define('KATAKANA', 2); // highest automatically-assigned error code
 define('KANJI', 3); // highest automatically-assigned error code
 define('DEFAULT_NUMBER_CHARACTER', 10); // highest automatically-assigned error code
+define('DEFAULT_BLOG_CATEGORY', 'HB'); // highest automatically-assigned error code
+define('DEFAULT_COURSE', 'N5'); // highest automatically-assigned error code
+define('DEFAULT_VOLCABULARY_COURSE', 'N5'); // highest automatically-assigned error code
 define('CHON_CHU_LEVEL_EASY', 10); // highest automatically-assigned error code
 define('CHON_CHU_LEVEL_NORMAL', 6); // highest automatically-assigned error code
 define('CHON_CHU_LEVEL_HARD', 4); // highest automatically-assigned error code
+
+define('R_BLOG_LIMIT', 5);
+define('HOME_BLOG_NUM', 10);
+define('GRAM_PRV_NUM', 150);
+define('VOLCA_PRV_NUM', 100);
+
+define('SUCCESS_CLASS', 'success');
+define('ERROR_CLASS','error');
+define('DEFAULT_PAGE_TITLE','Admin Panel');
+define('HTTP_JS_PATH','/hoctiengnhat/js/');
+define('SITE_PATH','/hoctiengnhat/');
+define('DEFAULT_THUMB_FOLDER','/uploads/');
+define('DEFAULT_THUMB','/uploads/default_thumb.png');
+
+
 

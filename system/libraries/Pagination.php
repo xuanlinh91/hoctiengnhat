@@ -561,7 +561,7 @@ class CI_Pagination {
 			// Take the general parameters, and squeeze this pagination-page attr in for JS frameworks.
 			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, 1);
 
-			$output .= $this->first_tag_open.'<a href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
+			$output .= $this->first_tag_open.'<a class="btn btn-default pagin" href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
 				.$this->first_link.'</a>'.$this->first_tag_close;
 		}
 
@@ -575,13 +575,13 @@ class CI_Pagination {
 			if ($i === $base_page)
 			{
 				// First page
-				$output .= $this->prev_tag_open.'<a href="'.$first_url.'"'.$attributes.$this->_attr_rel('prev').'>'
+				$output .= $this->prev_tag_open.'<a class="btn btn-default pagin" href="'.$first_url.'"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 			else
 			{
 				$append = $this->prefix.$i.$this->suffix;
-				$output .= $this->prev_tag_open.'<a href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
+				$output .= $this->prev_tag_open.'<a class="btn btn-default pagin" href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 
@@ -602,18 +602,18 @@ class CI_Pagination {
 					if ($this->cur_page === $loop)
 					{
 						// Current page
-						$output .= $this->cur_tag_open.$loop.$this->cur_tag_close;
+						$output .= $this->cur_tag_open.'<span class="btn btn-disable pagin">'.$loop.'</span>'.$this->cur_tag_close;
 					}
 					elseif ($i === $base_page)
 					{
 						// First page
-						$output .= $this->num_tag_open.'<a href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
+						$output .= $this->num_tag_open.'<a class="btn btn-default pagin" href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
 							.$loop.'</a>'.$this->num_tag_close;
 					}
 					else
 					{
 						$append = $this->prefix.$i.$this->suffix;
-						$output .= $this->num_tag_open.'<a href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('start').'>'
+						$output .= $this->num_tag_open.'<a class="btn btn-default pagin" href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('start').'>'
 							.$loop.'</a>'.$this->num_tag_close;
 					}
 				}
@@ -627,7 +627,7 @@ class CI_Pagination {
 
 			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, (int) $i);
 
-			$output .= $this->next_tag_open.'<a href="'.$base_url.$this->prefix.$i.$this->suffix.'"'.$attributes
+			$output .= $this->next_tag_open.'<a class="btn btn-default pagin" href="'.$base_url.$this->prefix.$i.$this->suffix.'"'.$attributes
 				.$this->_attr_rel('next').'>'.$this->next_link.'</a>'.$this->next_tag_close;
 		}
 
@@ -638,7 +638,7 @@ class CI_Pagination {
 
 			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, (int) $i);
 
-			$output .= $this->last_tag_open.'<a href="'.$base_url.$this->prefix.$i.$this->suffix.'"'.$attributes.'>'
+			$output .= $this->last_tag_open.'<a class="btn btn-default pagin" href="'.$base_url.$this->prefix.$i.$this->suffix.'"'.$attributes.'>'
 				.$this->last_link.'</a>'.$this->last_tag_close;
 		}
 
