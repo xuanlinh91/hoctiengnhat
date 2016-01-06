@@ -21,7 +21,7 @@ class Validation_rules
             array(
                 'field' => 'TITLE',
                 'label' => 'Title',
-                'rules' => 'trim|required|max_length[50]'
+                'rules' => 'trim|required|max_length[150]'
             ),
             array(
                 'field' => 'CONTENT',
@@ -109,7 +109,7 @@ class Validation_rules
             array(
                 'field' => 'TITLE',
                 'label' => 'Title',
-                'rules' => 'trim|required|max_length[50]'
+                'rules' => 'trim|required|max_length[150]'
             ),
             array(
                 'field' => 'CONTENT',

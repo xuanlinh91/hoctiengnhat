@@ -13,7 +13,7 @@ class MY_Controller extends CI_Controller
         if ($this->router->method != 'load_view_step') {
             $this->data = array();
         }
-
+        $this->load_counter();
         $CI->load->library('session');
     }
 
@@ -103,6 +103,55 @@ class MY_Controller extends CI_Controller
     {
         $segments = array('users', 'login');
         $this->redirect($segments);
+    }
+
+    public function load_counter()
+    {
+        $this->load->model('t_counter');
+        $time_now = time();    // l?u th?i gian hi?n t?i
+        $time_out = 300; // kho?ng th?i gian ch? ?? tính m?t k?t n?i m?i (tính b?ng giây)
+        $ip_address = $_SERVER['REMOTE_ADDR'];    // l?u l?i IP c?a k?t n?i
+
+        $sql = "SELECT `ip_address` FROM `counter` WHERE UNIX_TIMESTAMP(`last_visit`) + $time_out > $time_now AND `ip_address` = '$ip_address'";
+        $result = $this->t_counter->query_track($sql, 1);
+        if (!count($result))
+            $this->t_counter->query_track("INSERT INTO `counter` VALUES ('$ip_address', NOW())");
+
+
+
+// ??m s? ng??i ?ang online
+        $query = "SELECT `ip_address` FROM `counter` WHERE UNIX_TIMESTAMP(`last_visit`) + $time_out > $time_now";
+        $online = count($this->t_counter->query_track($query), 1);
+
+
+// ??m s? ng??i ghé th?m trong ngày (t? 0h ngày hôm ?ó ??n th?i ?i?m hi?n t?i)
+        $query = "SELECT `ip_address` FROM `counter` WHERE DAYOFYEAR(`last_visit`) = " . (date('z') + 2) . " AND YEAR(`last_visit`) = " . date('Y');
+        $day = count($this->t_counter->query_track($query, 1));
+
+
+// ??m s? ng??i ghé th?m trong tu?n (t? 0h ngày th? 2 ??n th?i ?i?m hi?n t?i)
+        $week = count($this->t_counter->query_track("SELECT `ip_address` FROM `counter` WHERE WEEKOFYEAR(`last_visit`) = " . date('W') . " AND YEAR(`last_visit`) = " . date('Y'), 1));
+
+
+// ??m s? ng??i ghé th?m trong tháng
+        $month = count($this->t_counter->query_track("SELECT `ip_address` FROM `counter` WHERE MONTH(`last_visit`) = " . date('n') . " AND YEAR(`last_visit`) = " . date('Y'), 1));
+
+
+// ??m s? ng??i ghé th?m trong n?m
+        $year = count($this->t_counter->query_track("SELECT `ip_address` FROM `counter` WHERE YEAR(`last_visit`) = " . date('Y'), 1));
+
+
+// ??m t?ng s? ng??i ?ã ghé th?m
+        $visit = count($this->t_counter->query_track("SELECT `ip_address` FROM `counter`", 1));
+
+
+        $this->data['online'] = $online;
+        $this->data['day'] = $day;
+        $this->data['week'] = $week;
+        $this->data['month'] = $month;
+        $this->data['year'] = $year;
+        $this->data['visit'] = $visit;
+
     }
 
 

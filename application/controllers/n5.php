@@ -15,7 +15,7 @@ class N5 extends MY_Controller {
         $this->load->library('table');
     }
 
-    public $course = 'n5';
+    public $course = 'N5';
 
     public function index()
     {

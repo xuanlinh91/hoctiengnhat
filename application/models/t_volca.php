@@ -69,7 +69,7 @@ Class T_volca extends CI_Model
     public function get_last_lesson_id($course = null){
         if($course != null){
             $this->db->select("max(`lesson`) as max_id");
-            $this->db->where('course', $this->course);
+            $this->db->where('course', $course);
             $this->db->from($this->table_name);
             $query = $this->db->get()->result_array();
             return ($query[0]);
@@ -80,7 +80,7 @@ Class T_volca extends CI_Model
     public function get_first_lesson_id($course = null){
         if($course != null){
             $this->db->select("min(`lesson`) as min_id");
-            $this->db->where('course', $this->course);
+            $this->db->where('course', $course);
             $this->db->from($this->table_name);
             $query = $this->db->get()->result_array();
             return ($query[0]);

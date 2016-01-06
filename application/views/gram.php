@@ -49,15 +49,22 @@ if(isset($course) && $course != null){
                 } elseif(isset($lesson) && $lesson != null && isset($gram) && $gram != null) {      ?>
                 <li class="list-group-item">
                     <?php
-                        echo(nl2br(htmlspecialchars($gram['content'])));
+                        echo $gram['content'];
                         if($gram['lesson'] < $max_id){?>
-                            <div class="text-center next-lesson">
-                                <a class="btn btn-info" href="<?php echo site_url($cor.'/gram/lesson/'.($gram['lesson']+1));?>">Bài tiếp theo</a>
+                            <div class="text-center next-lesson"><?php
+                                if ($gram['lesson'] < $max_id) {
+                                    ?>
+                                    <a class="btn btn-info" href="<?php echo site_url($cor.'/gram/lesson/'.($gram['lesson']+1));?>">Bài tiếp theo</a>
+                                    <?php
+                                }
+                                ?>
                             </div>
-                            <div class="fb-comments" data-href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" data-colorscheme="light" data-width="100%"></div>
                             <?php
                         }
 
+                            ?>
+                            <div class="fb-comments" data-href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" data-colorscheme="light" data-width="100%"></div>
+                            <?php
                     }
                     ?>
                 </li>

@@ -15,7 +15,7 @@ class N3 extends MY_Controller {
         $this->load->library('table');
     }
 
-    public $course = 'n3';
+    public $course = 'N3';
 
     public function index()
     {
@@ -84,8 +84,8 @@ class N3 extends MY_Controller {
             $volca = $this->t_volca->get_lesson($i, $this->course);
             $this->data['lesson'] = $i;
             $this->data['volca'] = $volca;
-            $max = $this->t_gram->get_last_lesson_id($this->course);
-            $min = $this->t_gram->get_first_lesson_id($this->course);
+            $max = $this->t_volca->get_last_lesson_id($this->course);
+            $min = $this->t_volca->get_first_lesson_id($this->course);
             $this->data['max_id'] = $max['max_id'];
             $this->data['min_id'] = $min['min_id'];
             $this->data['course'] = $this->course;

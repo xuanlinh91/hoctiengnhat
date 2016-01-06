@@ -105,8 +105,11 @@
                                     <li><a href="<?php echo site_url('n5/volca');?>">Phụ lục</a></li>
                                 </ul>
                             </li>
-                            <li >
+                            <li>
                                 <a href="<?php echo site_url('about');?>">Giới thiệu</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-default" style="padding-top: 10px; height: 40px; margin-top: 5px;" href="<?php echo site_url('login');?>">Đăng nhập</a>
                             </li>
                         </ul>
                     </div>

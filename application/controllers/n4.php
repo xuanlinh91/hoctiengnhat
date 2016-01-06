@@ -15,7 +15,7 @@ class N4 extends MY_Controller {
         $this->load->library('table');
     }
 
-    public $course = 'n4';
+    public $course = 'N4';
 
     public function index()
     {

@@ -20,11 +20,13 @@ class Home extends MY_Controller {
 	 */
 	public function index()
 	{
+
 		$this->load->model('t_blog');
+		$this->load->model('t_counter');
+
 		$blog = $this->t_blog->get_last_blog();
 		$this->data['blog'] = $blog;
 		$this->view('default', 'home', $this->data);
-
 	}
 
 }

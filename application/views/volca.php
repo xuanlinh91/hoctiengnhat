@@ -49,14 +49,15 @@ if(isset($course) && $course != null){
             } elseif(isset($lesson) && $lesson != null && isset($volca) && $volca != null) {      ?>
             <li class="list-group-item">
                 <?php
-                    echo(nl2br(htmlspecialchars($volca['content'])));
+                    echo $volca['content'];
                     if($volca['lesson'] < $max_id){?>
                         <div class="text-center next-lesson">
                             <a class="btn btn-info" href="<?php echo site_url($cor.'/volca/lesson/'.($volca['lesson']+1));?>">Bài tiếp theo</a>
                         </div>
+                        <?php  }?>
                         <div class="fb-comments" data-href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" data-colorscheme="light" data-width="100%"></div>
                         <?php
-                    }
+
                 }
                 ?>
             </li>
