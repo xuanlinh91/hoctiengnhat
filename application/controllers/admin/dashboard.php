@@ -29,7 +29,7 @@ class Dashboard extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('form_validation');
-        if (!$this->session->userdata('is_admin_login')) {
+        if (!$this->session->userdata('is_admin_login') && !$this->session->userdata('is_publisher_login')) {
             redirect('admin/home');
         }
     }

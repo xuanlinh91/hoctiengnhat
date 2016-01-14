@@ -15,6 +15,11 @@ class MY_Controller extends CI_Controller
         }
         $this->load_counter();
         $CI->load->library('session');
+        $this->load->model('t_blog');
+        $new_blog = $this->t_blog->list_all_new();
+        $this->data['r_blog'] = $new_blog;
+        $docs = $this->t_blog->r_docs();
+        $this->data['r_docs'] = $docs;
     }
 
     public function set_page_title($title = '')

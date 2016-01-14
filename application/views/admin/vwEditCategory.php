@@ -1,23 +1,6 @@
 <?php
-$this->load->view('admin/vwHeader');
+    $this->load->view('admin/vwHeader');
 ?>
-    <script>
-
-        tinymce.init({selector: '#edit_cate',
-            plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste jbimages"
-            ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
-            relative_urls: false,
-
-
-            height: "500",
-            width:650
-        });
-    </script>
-    <script type="text/javascript" src="<?php echo HTTP_JS_PATH;?>upload.js"></script>
 
     <div id="page-wrapper">
 

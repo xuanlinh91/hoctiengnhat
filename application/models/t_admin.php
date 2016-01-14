@@ -23,6 +23,34 @@ Class T_admin extends CI_Model
         $query = $this->db->get()->result_array();
         return ($query);
     }
+    public function get_data_by_id($id = null)
+    {
+        if ($id != null) {
+            $this->db->select("*");
+            $this->db->where('id', $id);
+            $this->db->from($this->table_name);
+            $query = $this->db->get()->result_array();
+            return ($query[0]);
+        } else {
+            return null;
+        }
+    }
 
+    function update_data_by_id($data = array(), $id)
+    {
+        if (is_null($data) || !is_array($data)) {
+
+            return null;
+        }
+        $this->db->where('id', $id);
+        $this->db->update($this->table_name, $data);
+        if ($this->db->affected_rows() > 0) {
+
+            return true;
+        } else {
+
+            return false;
+        }
+    }
 
 }

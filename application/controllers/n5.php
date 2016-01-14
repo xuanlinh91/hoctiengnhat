@@ -19,12 +19,13 @@ class N5 extends MY_Controller {
 
     public function index()
     {
+        $this->set_page_title('Giáo trình '.$this->course);
         $this->data['course'] = $this->course;
         $this->view('default', 'course', $this->data);
     }
 
     public function gram($check = null, $i = 0){
-
+        $this->set_page_title('Ngữ pháp '.$this->course);
         $new_blog = $this->t_blog->list_all_new();
         $this->data['r_blog'] = $new_blog;
 
@@ -43,18 +44,25 @@ class N5 extends MY_Controller {
         } elseif($check == 'lesson') {
             $this->data['course'] = $this->course;
             $gram = $this->t_gram->get_lesson($i, $this->course);
-            $this->data['lesson'] = $i;
-            $max = $this->t_gram->get_last_lesson_id($this->course);
-            $min = $this->t_gram->get_first_lesson_id($this->course);
-            $this->data['max_id'] = $max['max_id'];
-            $this->data['min_id'] = $min['min_id'];
-            $this->data['gram'] = $gram;
-            $this->view('default', 'gram', $this->data);
+            if ($gram != null) {
+                $this->data['lesson'] = $i;
+                $this->set_page_title('Ngữ pháp '.$this->course . ' bài '.$i);
+                $max = $this->t_gram->get_last_lesson_id($this->course);
+                $min = $this->t_gram->get_first_lesson_id($this->course);
+                $this->data['max_id'] = $max['max_id'];
+                $this->data['min_id'] = $min['min_id'];
+                $this->data['gram'] = $gram;
+                $this->view('default', 'gram', $this->data);
+            } else {
+                redirect($this->course.'/gram');
+            }
+        } else {
+            redirect($this->course.'/gram');
         }
     }
 
     public function kanji($course = 'n5'){
-
+        $this->set_page_title('Chữ hán '.$this->course);
         $new_blog = $this->t_blog->list_all_new();
         $this->data['r_blog'] = $new_blog;
         $kanji = $this->t_kanji->get_total_record($course);
@@ -64,7 +72,7 @@ class N5 extends MY_Controller {
     }
 
     public function volca($check = null, $i = 0){
-
+        $this->set_page_title('Từ vựng '.$this->course);
         $new_blog = $this->t_blog->list_all_new();
         $this->data['r_blog'] = $new_blog;
 
@@ -82,14 +90,21 @@ class N5 extends MY_Controller {
             $this->view('default', 'volca', $this->data);
         } elseif($check == 'lesson') {
             $volca = $this->t_volca->get_lesson($i, $this->course);
-            $this->data['lesson'] = $i;
-            $this->data['volca'] = $volca;
-            $max = $this->t_gram->get_last_lesson_id($this->course);
-            $min = $this->t_gram->get_first_lesson_id($this->course);
-            $this->data['max_id'] = $max['max_id'];
-            $this->data['min_id'] = $min['min_id'];
-            $this->data['course'] = $this->course;
-            $this->view('default', 'volca', $this->data);
+            if ($volca != null) {
+                $this->set_page_title('Từ vựng '.$this->course . ' bài '.$i);
+                $this->data['lesson'] = $i;
+                $this->data['volca'] = $volca;
+                $max = $this->t_gram->get_last_lesson_id($this->course);
+                $min = $this->t_gram->get_first_lesson_id($this->course);
+                $this->data['max_id'] = $max['max_id'];
+                $this->data['min_id'] = $min['min_id'];
+                $this->data['course'] = $this->course;
+                $this->view('default', 'volca', $this->data);
+            } else {
+                redirect($this->course.'/volca');
+            }
+        } else {
+            redirect($this->course.'/volca');
         }
     }
 

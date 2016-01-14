@@ -55,33 +55,44 @@ $this->load->view('admin/vwHeader');
             <div class="form-group">
                 <label class="control-label col-sm-3">Title</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input name="TITLE"  type="text" class="form-control" autofocus value="">
+                    <input name="TITLE"  type="text" class="form-control" autofocus value=" <?php
+                    echo isset($cms['TITLE']) && !empty($cms['TITLE']) ? $cms['TITLE'] : '';
+                    ?>">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3" for="organization-create-user">Category<span class="text-danger">*<span></label>
+                <label class="control-label col-sm-3" for="organization-create-user">Category</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
                     <?php echo form_dropdown('CATEGORY', $cate_dropdown, isset($cate_dropdown_checked) ? $cate_dropdown_checked: '', 'id="category-create-cms" class="form-control"'); ?>
                 </div>
             </div>
-
-
+            <?php
+                if (!isset($cms['THUMB'])) {
+                    $style = 'style="display: none;"';
+                    $button = '';
+                } else {
+                    $style = '';
+                    $button = 'style="display: none;"';
+                }
+            ?>
             <div class="form-group">
                 <label class="control-label col-sm-3">Thumbnail</label>
                 <div class="col-lg-2">
-                    <img width="100px" id="thumb_img" height="100px" style="display: none;" src="" />
+                    <img width="100px" id="thumb_img" height="100px" <?php echo $style;?>
+                         src="<?php echo isset($cms['THUMB']) && !empty($cms['THUMB']) ? base_url($cms['THUMB']) : '';?>" />
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2" <?php echo $style;?>>
                     <a href="" id="del_thumb" class="btn btn-danger" style="display: none;">Xóa thumbnail</a>
                 </div>
 
-                <input name="THUMB" id="thumb_link" type="hidden" class="form-control" value="">
-                <div id="upload_file" class="col-sm-8 col-md-6 col-lg-8">
-                    <input type="file" class="form-control" name="myfile" id="myfile">
-                </div>
+                <input name="THUMB" id="thumb_link" type="hidden" class="form-control" value="<?php echo isset($cms['THUMB']) && !empty($cms['THUMB']) ? trim($cms['THUMB']) : '';?>">
+                        <div id="upload_file" class="col-sm-8 col-md-6 col-lg-8" <?php echo $button;?>>
+                            <input type="file" class="form-control" name="myfile" id="myfile">
+                        </div>
+
             </div>
 
-            <div class="form-group">
+            <div class="form-group" <?php echo $button;?>>
                 <div id="upload_button" class="col-lg-offset-3 col-lg-8">
                     <input type="button" class="btn btn-default" value="Upload" onclick="doUpload();"/>
                     <input type="button" class="btn btn-default" value="Cancle" onclick="cancleUpload();"/>
@@ -104,13 +115,13 @@ $this->load->view('admin/vwHeader');
             <div class="form-group">
                 <label class="control-label col-sm-3">Content</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <textarea id="create_cms" class="text-counter-js form-control" rows="50" cols="50" maxlength="4900" name="CONTENT"></textarea>
+                    <textarea id="create_cms" class="text-counter-js form-control" rows="50" cols="50" maxlength="4900" name="CONTENT"> <?php echo isset($cms['CONTENT']) && !empty($cms['CONTENT']) ? $cms['CONTENT'] : '';?></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3">Content Preview</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <textarea class="text-counter-js form-control" rows="5" cols="10" maxlength="200" name="PREVIEW"></textarea>
+                    <textarea class="text-counter-js form-control" rows="5" cols="10" maxlength="200" name="PREVIEW"><?php echo isset($cms['PREVIEW']) && !empty($cms['PREVIEW']) ? trim($cms['PREVIEW']) : '';?></textarea>
                 </div>
             </div>
             <div class="form-group">

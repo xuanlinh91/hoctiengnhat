@@ -28,7 +28,19 @@ class Category extends MY_Controller {
     }
 
     public function create() {
-        $this->load->view('admin/vwAddUser',$this->data);
+        $option = array();
+        $option['BLANK'] = '';
+        foreach ($this->t_category->get_total() as $cate) {
+            if($cate['PARENT'] != NULL){
+                $val = $cate['ID'];
+                $option[$val] = $cate['CATEGORY'];
+            }
+        }
+
+        $this->data['cate_dropdown'] = $option;
+
+
+        $this->load->view('admin/vwAddCategory',$this->data);
     }
 
     public function edit($id) {
@@ -37,7 +49,7 @@ class Category extends MY_Controller {
             $option = array();
             $option['BLANK'] = '';
             foreach ($this->t_category->get_total() as $cate) {
-                if($cate['ID'] != $id){
+                if($cate['ID'] != $id && $cate['PARENT'] == null){
                     $val = $cate['ID'];
                     $option[$val] = $cate['CATEGORY'];
                 }
@@ -59,10 +71,6 @@ class Category extends MY_Controller {
         } else {
             redirect('admin/category');
         }
-    }
-
-    public function delete_user() {
-        // Code goes here
     }
 
 

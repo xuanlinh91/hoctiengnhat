@@ -37,6 +37,8 @@ include_once('share/header.php');
                         ?>
                     </tbody>
                 </table>
+                <div class="fb-comments" data-href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" data-colorscheme="light" data-width="100%"></div>
+
             </div>
             <div class="col-lg-4">
                 <?php

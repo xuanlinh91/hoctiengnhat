@@ -10,10 +10,7 @@ include_once('share/header.php');
                 <div class="blog-content">
                     <?php
                     if(isset($blog) && $blog != null){
-                        echo($blog['CONTENT']);
-                        ?>
-                        <?php
-
+                            echo($blog['CONTENT']);
                     }?>
                 </div>
                 <div class="fb-comments" data-href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" data-colorscheme="light" data-width="100%"></div>

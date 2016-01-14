@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/application/config/constants.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/about.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/controllers/admin/cms.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/controllers/blog.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/game.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/controllers/home.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/login.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/n3.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/n4.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/n5.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/models/form_validation/validation_rules.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/about.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/admin/vwAddCourseKanji.php" charset="UTF-8" />
@@ -14,13 +21,23 @@
     <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourseKanji.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourseVolca.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/blog_template.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/cash.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/change_password.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/chonchu.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/chonchu_start.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/course.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/docs.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/home.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/kanji.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/login.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/more.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/register.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/share/footer.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/share/header.php" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/application/views/share/header_backup.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/share/header2.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/share/right_column.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/user.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/user_edit.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/js/admin.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/js/upload.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/system/language/english/form_validation_lang.php" charset="UTF-8" />

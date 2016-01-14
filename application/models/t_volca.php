@@ -40,7 +40,9 @@ Class T_volca extends CI_Model
         $this->db->where('lesson', $lesson);
         $this->db->from($this->table_name);
         $query = $this->db->get()->result_array();
-        return ($query[0]);
+        if (count($query) > 0) {
+            return ($query[0]);
+        } else return null;
     }
 
     public function get_data_by_id($id = null)

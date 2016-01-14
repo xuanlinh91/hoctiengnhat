@@ -4127,3 +4127,46 @@ INSERT INTO `hoctiengnhat`.`kanji` (`CHAR`, `AMHV`, `NGHIA`, `ON`, `KUN`, `COURS
 INSERT INTO `hoctiengnhat`.`kanji` (`CHAR`, `AMHV`, `NGHIA`, `ON`, `KUN`, `COURSE`) VALUES ('葉', 'diệp', 'lá, lạc diệp, hồng diệp', 'ヨウ', '', 'N3');
 INSERT INTO `hoctiengnhat`.`kanji` (`CHAR`, `AMHV`, `NGHIA`, `ON`, `KUN`, `COURSE`) VALUES ('調', 'điều', 'điều tra, điều hòa;thanh điệu, giai điệu', 'チョウ トトノ.エ', 'しら.べる しら.べ ととの.う', 'N3');
 INSERT INTO `hoctiengnhat`.`kanji` (`CHAR`, `AMHV`, `NGHIA`, `ON`, `KUN`, `COURSE`) VALUES ('頂', 'đính', 'thiên đỉnh, đỉnh đầu', 'チョウ', 'いただ.く いただき', 'N3');
+
+
+RENAME TABLE `users` TO `publisher`;
+
+CREATE TABLE `user` (
+	`ID` INT NULL,
+	`USERNAME` VARCHAR(50) NULL,
+	`PASSWORD` VARCHAR(50) NULL,
+	`FIRSTNAME` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`LASTNAME` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`EMAIL` VARCHAR(50) NULL,
+	`BIRTH` DATE NULL,
+	`DELETE` INT NULL
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+ALTER TABLE `user`
+	COLLATE='utf8_general_ci';
+
+ALTER TABLE `user`
+	CHANGE COLUMN `USERNAME` `USERNAME` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci' AFTER `ID`,
+	CHANGE COLUMN `PASSWORD` `PASSWORD` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci' AFTER `USERNAME`,
+	CHANGE COLUMN `EMAIL` `EMAIL` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci' AFTER `LASTNAME`,
+	CHANGE COLUMN `BIRTH` `DATE` DATETIME NULL DEFAULT NULL AFTER `EMAIL`;
+
+ALTER TABLE `user`
+	CHANGE COLUMN `ID` `ID` INT(11) NULL AUTO_INCREMENT FIRST;
+/* SQL Error (1075): Incorrect table definition; there can be only one auto column and it must be defined as a key */
+ALTER TABLE `user`
+	CHANGE COLUMN `ID` `ID` INT(11) NOT NULL AUTO_INCREMENT FIRST,
+	ADD PRIMARY KEY (`ID`);
+
+
+ALTER TABLE `user`
+	ADD COLUMN `GOLD` INT(11) NULL DEFAULT '1000' AFTER `DELETE`;
+
+ALTER TABLE `user`
+	ADD COLUMN `STATUS` INT NULL DEFAULT '0' AFTER `GOLD`;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ALTER TABLE `user`
+CHANGE COLUMN `DELETE` `DELETED` INT(11) NULL DEFAULT NULL AFTER `DATE`;

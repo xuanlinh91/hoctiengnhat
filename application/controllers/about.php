@@ -27,6 +27,7 @@ class About extends MY_Controller {
 
     public function index()
     {
+        $this->set_page_title('Giới thiệu');
         $new_blog = $this->t_blog->list_all_new();
         $this->data['r_blog'] = $new_blog;
         $about = $this->t_blog->get_data_by_property('*',array("CATEGORY" => 'AB'));

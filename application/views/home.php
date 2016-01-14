@@ -17,7 +17,7 @@ include_once('share/header.php');
                         <p>Sản phẩm website học tiếng nhật miễn phí ở mức độ cơ bản dành cho các bạn mới làm quen với tiếng nhật, bao gồm 3 cấp độ phổ thông nhất N5, N4, N3
                             Hãy đăng ký với chúng tôi để nhận được các đầy đủ kiến thức và tài liệu học tập nhé!
                         </p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Đăng ký</a></p>
+                        <p><a class="btn btn-lg btn-primary" href="<?php echo site_url('login/register')?>" role="button">Đăng ký</a></p>
                     </div>
                 </div>
             </div>
@@ -77,22 +77,77 @@ include_once('share/header.php');
 
         <!-- START THE FEATURETTES -->
     <div class="container news">
+        <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+            <li class="active"><a href="<?php echo site_url('blog/blog/list')?>">Home</a></li>
+        </ul>
+
         <?php
             for($i=0;$i<count($blog);$i++){
         ?>
-                <hr class="featurette-divider">
 
                 <div class="row featurette">
-                    <div class="col-md-2">
+                    <div class="col-md-2 thumbnail">
                         <img class="featurette-image img-responsive" alt="500x500" src="<?php echo base_url($blog[$i]['THUMB']);?>">
                     </div>
                     <div class="col-md-8">
-                        <h4 class="featurette-heading"><a href="<?php echo site_url('blog').'/'.$blog[$i]['ID'];?>"><?php echo $blog[$i]['TITLE'];?></a></h4>
+                        <h1 class="featurette-heading"><a href="<?php echo site_url('blog').'/'.$blog[$i]['ID'];?>"><?php echo $blog[$i]['TITLE'];?></a></h1>
                         <p class="lead"><?php $prv = mb_substr($blog[$i]['PREVIEW'],0,200); echo preg_replace('/([^\pL\.\ ]+)/u', '', strip_tags($prv));?></p>
                     </div>
 
                 </div>
+                <hr class="featurette-divider">
+
+                <?php
+
+            }
+        ?>
+
+        <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+            <li class="active"><a href="<?php echo site_url('blog/docs/list')?>">Tài liệu - Đề thi</a></li>
+        </ul>
+
         <?php
+            for($i=0;$i<count($docs);$i++){
+        ?>
+
+                <div class="row featurette">
+                    <div class="col-md-2 thumbnail">
+                        <img class="featurette-image img-responsive" alt="500x500" src="<?php echo base_url($docs[$i]['THUMB']);?>">
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="featurette-heading"><a href="<?php echo site_url('blog').'/'.$docs[$i]['ID'];?>"><?php echo $docs[$i]['TITLE'];?></a></h3>
+                        <p class="lead"><?php $prv = mb_substr($docs[$i]['PREVIEW'],0,200); echo preg_replace('/([^\pL\.\ ]+)/u', '', strip_tags($prv));?></p>
+                    </div>
+
+                </div>
+                <hr class="featurette-divider">
+
+                <?php
+
+            }
+        ?>
+
+        <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+            <li class="active"><a href="<?php echo site_url('blog/more')?>">Phụ lục</a></li>
+        </ul>
+
+        <?php
+            for($i=0;$i<count($more);$i++){
+        ?>
+
+                <div class="row featurette">
+                    <div class="col-md-2 thumbnail">
+                        <img class="featurette-image img-responsive" alt="500x500" src="<?php echo base_url($more[$i]['THUMB']);?>">
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="featurette-heading"><a href="<?php echo site_url('blog').'/'.$more[$i]['ID'];?>"><?php echo $more[$i]['TITLE'];?></a></h4>
+                        <p class="lead"><?php $prv = mb_substr($more[$i]['PREVIEW'],0,200); echo preg_replace('/([^\pL\.\ ]+)/u', '', strip_tags($prv));?></p>
+                    </div>
+
+                </div>
+                <hr class="featurette-divider">
+
+                <?php
 
             }
         ?>

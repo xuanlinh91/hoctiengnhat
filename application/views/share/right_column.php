@@ -1,7 +1,13 @@
-<div class="r_col" id="ad">
-    <img width="360px" src="<?php echo base_url('images/ad.gif');?>" />
-</div>
-<hr>
+<?php
+    if(!isset($this->session->userdata['username_user']) || $this->session->userdata['is_user_login'] == false){
+        ?>
+        <div class="r_col" id="ad">
+            <a target="_blank" href="<?php echo site_url('login/register');?>" ><img width="360px" src="<?php echo base_url('images/ad.gif');?>" /></a>
+        </div>
+        <hr>
+        <?php
+    }
+?>
 <div class="r_col" id="new_blog">
     <h4>Blog mới nhất</h4>
     <ul>
@@ -18,7 +24,7 @@
         ?>
         <div class="r_col" id="lienquan">
             <h4>Bài liên quan </h4>
-            <ul>
+            <ul class="list-group">
                 <?php
                 $hientai = isset($gram) ? $gram['lesson'] : $volca['lesson'];
                 $tenlink = isset($gram) ? 'Ngữ pháp cơ bản '.strtoupper($cor) : 'Từ vựng '.strtoupper($cor);
@@ -26,7 +32,7 @@
                 $start = ($hientai-2) < $min_id ? $min_id : ($hientai-2);
                 $end = ($hientai+3) > $max_id ? $max_id : ($hientai+3);
                 for($i=$start;$i<=$end;$i++){
-                    echo '<a href="'.site_url($cor.'/'.$link.'/lesson').'/'.$i.'"><li><i class="fa fa-user"></i> '.$tenlink.' :: Bài '.$i.'</li></a>';
+                    echo '<a href="'.site_url($cor.'/'.$link.'/lesson').'/'.$i.'"><li class="list-group-item"><i class="fa fa-user"></i> '.$tenlink.' :: Bài '.$i.'</li></a>';
                 }
                 ?>
             </ul>
@@ -36,9 +42,13 @@
     }
 ?>
 <div class="r_col" id="more">
-    <h4>Tài liệu tham khảo</h4>
+    <h4>Tài liệu</h4>
     <ul>
-
+        <?php
+        for($i=0;$i<count($r_docs);$i++){
+            echo '<a href="'.site_url('blog/docs').'/'.$r_docs[$i]['ID'].'"><li>'.substr($r_docs[$i]['CATEGORY'], 2, 2) .' - '. $r_docs[$i]['TITLE']. '</li></a>';
+        }
+        ?>
     </ul>
 </div>
 <hr>

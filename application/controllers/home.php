@@ -23,10 +23,15 @@ class Home extends MY_Controller {
 
 		$this->load->model('t_blog');
 		$this->load->model('t_counter');
-
-		$blog = $this->t_blog->get_last_blog();
-		$this->data['blog'] = $blog;
+		$this->data['blog'] = $this->t_blog->get_last_home_blog();
+		$this->data['docs'] = $this->t_blog->get_last_home_docs();
+		$this->data['more'] = $this->t_blog->get_last_home_more();
 		$this->view('default', 'home', $this->data);
+	}
+
+	public function abcd()
+	{
+		$this->view('default', 'abcd', $this->data);
 	}
 
 }

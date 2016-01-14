@@ -10,11 +10,11 @@ $this->load->view('admin/vwHeader');
 
         <div class="row">
             <div class="col-lg-12">
-                <h1>Users <small>Manage Users Module</small></h1>
+                <h1>User <small>Manage User Module</small></h1>
                 <ol class="breadcrumb">
-                    <li><a href="Users"><i class="icon-dashboard"></i> Users</a></li>
-                    <li class="active"><i class="icon-file-alt"></i> List Users</li>
-                    <button class="btn btn-primary" type="button" style="float:right;">Add New User</button>
+                    <li><a href="Users"><i class="icon-dashboard"></i> User</a></li>
+                    <li class="active"><i class="icon-file-alt"></i> List User</li>
+                    <a href="<?php echo site_url('admin/user/add_user')?>" class="btn btn-primary" type="button" style="float:right;">Add New User</a>
                     <div style="clear: both;"></div>
                 </ol>
             </div>
@@ -37,25 +37,25 @@ $this->load->view('admin/vwHeader');
                 </thead>
                 <tbody>
                 <?php
-                    foreach($data_user as $val){
-                        ?>
-
-                        <tr>
-                            <td><?php echo $val['id']; ?></td>
-                            <td><?php echo $val['user_name']; ?></td>
-                            <td><?php echo $val['email']; ?></td>
-                            <td><?php echo $val['first_name']; ?></td>
-                            <td><?php echo $val['last_name']; ?></td>
-                            <td><a class="btn btn-info" href="<?php echo site_url('admin/users/edit_user').'/'.$val['id']?>">Edit</a></td>
-                            <td><a class="btn btn-danger cms_delete" href="<?php echo site_url('admin/users/delete_user').'/'.$val['id']?>">Delete</a></td>
-                        </tr>
-                        <?php
-                    }
+                foreach($data_user as $val){
                     ?>
+
+                    <tr>
+                        <td><?php echo $val['ID']; ?></td>
+                        <td><?php echo $val['USERNAME']; ?></td>
+                        <td><?php echo $val['EMAIL']; ?></td>
+                        <td><?php echo $val['FIRSTNAME']; ?></td>
+                        <td><?php echo $val['LASTNAME']; ?></td>
+                        <td><a class="btn btn-info" href="<?php echo site_url('admin/user/edit_user').'/'.$val['ID']?>">Edit</a></td>
+                        <td><a class="btn btn-danger cms_delete" href="<?php echo site_url('admin/user/delete_user').'/'.$val['ID']?>">Delete</a></td>
+                    </tr>
+                    <?php
+                }
+                ?>
                 </tbody>
             </table>
             <?php
-                echo $this->pagination->create_links();
+            echo $this->pagination->create_links();
             ?>
 
 

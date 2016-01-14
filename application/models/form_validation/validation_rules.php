@@ -190,4 +190,63 @@ class Validation_rules
         return $rules['update_kanji_rules'];
     }
 
+    public static function register_user_rules()
+    {
+        $rules['register_user_rules'] = array(
+            array(
+                'field' => 'PASSWORD',
+                'label' => 'Password',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'FIRSTNAME',
+                'label' => 'Firstname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'LASTNAME',
+                'label' => 'Lastname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'EMAIL',
+                'label' => 'Email',
+                'rules' => 'required'
+            ),
+        );
+        return $rules['register_user_rules'];
+    }
+
+    public static function add_user_rules()
+    {
+        $rules['add_user_rules'] = array(
+            array(
+                'field' => 'USERNAME',
+                'label' => 'User name',
+                'rules' => 'trim|required|max_length[50]|form_validation_alpha'
+            ),
+            array(
+                'field' => 'PASSWORD',
+                'label' => 'Password',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'FIRSTNAME',
+                'label' => 'Firstname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'LASTNAME',
+                'label' => 'Lastname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'EMAIL',
+                'label' => 'Email',
+                'rules' => 'required'
+            ),
+        );
+        return $rules['add_user_rules'];
+    }
+
 }

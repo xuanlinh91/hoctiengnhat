@@ -58,8 +58,6 @@ $type_mess_code = $this->session->userdata('type_mess_code');
             } ?>
 
         };
-
-//        console.log("<?php //echo json_encode($list_of_errors()); ?>//");
     </script>
 
 
@@ -93,22 +91,20 @@ $type_mess_code = $this->session->userdata('type_mess_code');
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li <?php echo  $pg =='dash' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/dashboard');?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li <?php echo  $pg =='cms' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/cms/blog_list');?>"><i class="fa fa-file"></i> CMS</a></li>
-                <li <?php echo  $pg =='users' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/users');?>"><i class="fa fa-file"></i> Users</a></li>
-                <li <?php echo  $pg =='course' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/course');?>"><i class="fa fa-file"></i> Course</a></li>
-                <li <?php echo  $pg =='category' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/category');?>"><i class="fa fa-file"></i> Category</a></li>
-
-
+                <?php if ($this->session->userdata('is_publisher_login')  || $this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='cms' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/cms/blog_list');?>"><span class="glyphicon glyphicon-book"></span> Manage Content</a></li><?php }?>
+                <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='user' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/user/user_list');?>"><span class="glyphicon glyphicon-user"></span> Manage User</a></li><?php }?>
+                <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='publisher' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/publisher/publisher_list');?>"><span class="glyphicon glyphicon-user"></span> Manage Publisher</a></li><?php }?>
+                <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='course' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/course');?>"><span class="glyphicon glyphicon-th-list"></span> Manage Course</a></li><?php }?>
+                <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='category' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/category');?>"><span class="glyphicon glyphicon-th"></span> Manage Category</a></li><?php }?>
+                <?php if ($this->session->userdata('is_publisher_login') || $this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='profile' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/home/profile');?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li><?php }?>
             </ul>
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $this->session->userdata('username') ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
-                        <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                        <li><a href="<?php echo site_url('admin/home/profile')?>"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="<?php echo site_url('admin/home/change_password')?>"><i class="fa fa-gear"></i> Change password</a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo site_url('admin/home/logout');?>"><i class="fa fa-power-off"></i> Log Out</a></li>
                     </ul>

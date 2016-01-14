@@ -97,13 +97,16 @@ define('CHON_CHU_LEVEL_NORMAL', 6); // highest automatically-assigned error code
 define('CHON_CHU_LEVEL_HARD', 4); // highest automatically-assigned error code
 
 define('R_BLOG_LIMIT', 5);
-define('HOME_BLOG_NUM', 10);
+define('HOME_BLOG_NUM', 3);
+define('HOME_BLOG_DOCS', 3);
+define('HOME_BLOG_MORE', 3);
 define('GRAM_PRV_NUM', 150);
 define('VOLCA_PRV_NUM', 100);
 
 define('SUCCESS_CLASS', 'success');
 define('ERROR_CLASS','error');
 define('DEFAULT_PAGE_TITLE','Admin Panel');
+define('DEFAULT_HOME_TITLE','Nhật ngữ online');
 define('HTTP_JS_PATH','/hoctiengnhat/js/');
 define('SITE_PATH','/hoctiengnhat/');
 define('DEFAULT_THUMB_FOLDER','/uploads/');

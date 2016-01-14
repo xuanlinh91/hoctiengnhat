@@ -12,7 +12,7 @@ class Cms extends MY_Controller {
         $this->load->file(APPPATH . 'models/form_validation/validation_rules.php', false);
         $this->load->model('t_blog');
         $this->load->model('t_category');
-        if (!$this->session->userdata('is_admin_login')) {
+        if (!$this->session->userdata('is_admin_login') && !$this->session->userdata('is_publisher_login')) {
             redirect('admin/home');
         }
 
@@ -67,6 +67,14 @@ class Cms extends MY_Controller {
             $option[$val] = $cate['CATEGORY'];
         }
         unset($option['AB']);
+
+        if ($this->session->userdata('CREATE_BLOG')) {
+            $temp = $this->session->userdata('CREATE_BLOG');
+            $this->data['cms'] = $temp;
+            $this->session->unset_userdata('CREATE_BLOG');
+            $this->data['cate_dropdown_checked'] = $temp['CATEGORY'];
+        }
+
         $this->data['cate_dropdown'] = $option;
         $this->data['cate_dropdown_checked'] = DEFAULT_BLOG_CATEGORY;
         $this->load->view('admin/vwAddNewCMS', $this->data);
@@ -99,6 +107,7 @@ class Cms extends MY_Controller {
             $list_of_errors = validate_load(Validation_rules::create_blog_rules());
             $this->session->set_userdata('list_of_errors', json_encode($list_of_errors));
             $this->session->set_userdata('error_mess_code', validation_errors());
+            $this->session->set_userdata('CREATE_BLOG', $data);
             redirect('admin/cms/create');
         }
     }

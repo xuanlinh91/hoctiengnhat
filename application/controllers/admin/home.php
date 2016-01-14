@@ -29,6 +29,7 @@ class Home extends MY_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('t_admin');
+        $this->load->model('t_publisher');
     }
 
     public function index() {
@@ -55,6 +56,7 @@ class Home extends MY_Controller {
             } else {
                 $enc_pass  = md5($password);
                 $val = $this->t_admin->get_data($user, $enc_pass);
+                $val2 = $this->t_publisher->get_data($user, $enc_pass);
                 if (count($val)>0) {
                     $recs = $val[0];
                     $this->session->set_userdata(array(
@@ -65,7 +67,18 @@ class Home extends MY_Controller {
                             'user_type' => $recs['user_type']
                         )
                     );
-                    redirect('admin/dashboard');
+                    redirect('admin/cms');
+                } elseif(count($val2)>0) {
+                    $recs = $val2[0];
+                    $this->session->set_userdata(array(
+                            'id' => $recs['id'],
+                            'username' => $recs['username'],
+                            'email' => $recs['email'],
+                            'is_publisher_login' => true,
+                            'user_type' => $recs['user_type']
+                        )
+                    );
+                    redirect('admin/cms');
                 } else {
                     $err['error'] = '<strong>Access Denied</strong> Invalid Username/Password';
                     $this->load->view('admin/vwLogin', $err);
@@ -87,6 +100,91 @@ class Home extends MY_Controller {
         redirect('admin/home', 'refresh');
     }
 
+    public function edit_profile()
+    {
+        $this->set_page_title("Edit Profile");
+        $id = $this->session->userdata['id'];
+        if ($this->session->userdata('is_admin_login')) {
+            if($id!= null){
+                $result = $this->t_admin->get_data_by_id($id);
+                $this->data['user'] = $result;
+                $this->load->view('admin/vwEditAdminProfile', $this->data);
+            } else {
+                redirect('admin/home');
+            }
+        } elseif($this->session->userdata('is_publishser_login')){
+            if($id!= null){
+                $result = $this->t_publisher->get_data_by_id($id);
+                $this->data['user'] = $result;
+                $this->load->view('admin/vwEditPublisherProfile', $this->data);
+            } else {
+                redirect('admin/home');
+            }
+        }
+
+    }
+
+    public function edit_profile_submit()
+    {
+        $data = $this->input->post();
+        $id = $this->session->userdata['id'];
+        unset($data['btn_submit']);
+        if ($data != null) {
+            if ($this->session->userdata('is_admin_login')) {
+                $this->t_admin->update_data_by_id($data, $id);
+                redirect('admin/home/profile');
+            } elseif ($this->session->userdata('is_publisher_login')){
+                unset($data['username']);
+                $this->t_publisher->update_data_by_id($data, $id);
+                redirect('admin/home/profile');
+            }
+        }
+
+    }
+
+    public function profile()
+    {
+        $this->set_page_title("Profile");
+        $id = $this->session->userdata['id'];
+        if($id!= null){
+            $result = $this->t_publisher->get_data_by_id($id);
+            $this->data['user'] = $result;
+            $this->load->view('admin/vwProfile', $this->data);
+        } else {
+            redirect('admin/home');
+        }
+
+    }
+
+    public function change_password()
+    {
+        $this->set_page_title("Change password");
+        $this->load->view('admin/vwChangePassword', $this->data);
+    }
+
+    public function change_password_submit()
+    {
+        $data = $this->input->post();
+        $pass = $this->t_publisher->get_data_by_id($this->session->userdata['id']);
+        $pass_admin = $this->t_admin->get_data_by_id($this->session->userdata['id']);
+        unset($data['btn_submit']);
+        if ($data != null) {
+            if (md5($data['old_password']) == $pass_admin['password']) {
+                unset($data['old_password']);
+                unset($data['new_password_confirm']);
+                $data['password'] = md5($data['new_password']);
+                unset($data['new_password']);
+                if ($this->session->userdata('is_admin_login')) {
+                    $this->t_admin->update_data_by_id($data, $this->session->userdata['id']);
+                } elseif ($this->session->userdata('is_publisher_login')){
+                    $this->t_publisher->update_data_by_id($data, $this->session->userdata['id']);
+                }
+
+            }
+
+        }
+        redirect('admin/home/profile');
+    }
 
 
 }
