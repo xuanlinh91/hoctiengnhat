@@ -89,6 +89,38 @@ jQuery(document).ready(function ($) {
 
     });
 
+    $('.user_delete').click(function () {
+        var redirect_link = $(this).attr('href');
+        var removeConfirm = confirm('Bạn có chắc chắn muốn xóa user này?');
+        if (removeConfirm) {
+                window.location.href = redirect_link;
+        } else {
+            return false;
+        }
+
+    });
+    $('.show-password').click(function () {
+        var pass_input = $('.show-password').parent().parent().find('.password');
+        if (pass_input.attr('type') == 'password') {
+            pass_input.removeAttr('type');
+        } else {
+            pass_input.attr('type', 'password');
+        }
+
+    });
+
+
+    $('.publisher_delete').click(function () {
+        var redirect_link = $(this).attr('href');
+        var removeConfirm = confirm('Bạn có chắc chắn muốn xóa publisher này?');
+        if (removeConfirm) {
+                window.location.href = redirect_link;
+        } else {
+            return false;
+        }
+
+    });
+
     $('.cate_delete').click(function () {
         var redirect_link = $(this).attr('href');
         var removeConfirm = confirm('Bạn có chắc chắn muốn xóa mục này? Tất cả bài viết trong mục sẽ bị chuyển sang Home Blog!');

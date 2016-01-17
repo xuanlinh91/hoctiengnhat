@@ -71,6 +71,8 @@ class Cms extends MY_Controller {
         if ($this->session->userdata('CREATE_BLOG')) {
             $temp = $this->session->userdata('CREATE_BLOG');
             $this->data['cms'] = $temp;
+            if (isset($temp['THUMB'])) {
+            }
             $this->session->unset_userdata('CREATE_BLOG');
             $this->data['cate_dropdown_checked'] = $temp['CATEGORY'];
         }
@@ -82,6 +84,10 @@ class Cms extends MY_Controller {
 
     public function create_submit() {
         $data = $this->input->post();
+        echo '<pre>';
+        var_dump($data);
+        exit;
+
         unset($data['ID']);
         unset($data['myfile']);
         unset($data['btn_submit']);

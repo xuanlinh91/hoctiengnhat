@@ -1,6 +1,6 @@
 <?php
 $list_of_errors = $this->session->userdata('list_of_errors');
-$error_flag = $this->session->userdata('error_flag_code');
+$error_flag_code = $this->session->userdata('error_flag_code');
 $error_mess_code = $this->session->userdata('error_mess_code');
 $type_mess_code = $this->session->userdata('type_mess_code');
 ?>

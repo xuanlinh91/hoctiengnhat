@@ -32,7 +32,12 @@ $this->load->view('admin/vwHeader');
             <div class="form-group">
                 <label class="control-label col-sm-3">Password Reset</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input class="form-control" value="" name="PASSWORD">
+                    <div class="input-group">
+                        <input type="password" class="form-control password" name="PASSWORD">
+                          <span class="input-group-addon">
+                            <input class="show-password" type="checkbox"">
+                          </span>
+                    </div>
                 </div>
             </div>
 

@@ -333,7 +333,6 @@ form label {
 }
 
 form input[type="text"],
-form input[type="email"],
 form input[type="search"],
 form input[type="password"],
 form textarea {

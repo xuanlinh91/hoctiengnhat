@@ -47,7 +47,7 @@ $this->load->view('admin/vwHeader');
                         <td><?php echo $val['FIRSTNAME']; ?></td>
                         <td><?php echo $val['LASTNAME']; ?></td>
                         <td><a class="btn btn-info" href="<?php echo site_url('admin/user/edit_user').'/'.$val['ID']?>">Edit</a></td>
-                        <td><a class="btn btn-danger cms_delete" href="<?php echo site_url('admin/user/delete_user').'/'.$val['ID']?>">Delete</a></td>
+                        <td><a class="btn btn-danger user_delete" href="<?php echo site_url('admin/user/delete_user').'/'.$val['ID']?>">Delete</a></td>
                     </tr>
                     <?php
                 }
