@@ -74,7 +74,13 @@ class Course extends MY_Controller {
     public function edit_grammar($id = null)
     {
         if ($id != null) {
-            $gram = $this->t_gram->get_data_by_id($id);
+            if ($this->session->userdata('EDIT_GRAMMAR')) {
+                $gram = $this->session->userdata('EDIT_GRAMMAR');
+                $this->session->unset_userdata('EDIT_GRAMMAR');
+            } else {
+                $gram = $this->t_gram->get_data_by_id($id);
+            }
+
             $option = array();
             foreach ($this->t_course->get_total() as $course) {
                 $val = $course['ID'];
@@ -91,14 +97,21 @@ class Course extends MY_Controller {
     public function create_grammar()
     {
         $this->set_page_title("Create new Grammar Lesson");
+        if ($this->session->userdata('CREATE_GRAMMAR')) {
+            $gram = $this->session->userdata('CREATE_GRAMMAR');
+            $this->session->unset_userdata('CREATE_GRAMMAR');
+            $this->data['gram'] = $gram;
+        }
+
         $option = array();
         foreach ($this->t_course->get_total() as $course) {
             $val = $course['ID'];
             $option[$val] = $course['NAME'];
         }
 
+
         $this->data['course_dropdown'] = $option;
-        $this->data['course_dropdown_checked'] = DEFAULT_GRAMMAR_COURSE;
+        $this->data['course_dropdown_checked'] = DEFAULT_COURSE;
         $this->view('default', 'admin/vwAddCourseGrammar', $this->data);
     }
 
@@ -121,6 +134,7 @@ class Course extends MY_Controller {
             $list_of_errors = validate_load(Validation_rules::create_blog_rules());
             $this->session->set_userdata('list_of_errors', json_encode($list_of_errors));
             $this->session->set_userdata('error_mess_code', validation_errors());
+            $this->session->set_userdata('CREATE_GRAMMAR', $data);
             redirect('admin/course/create_grammar');
         }
     }
@@ -233,7 +247,13 @@ class Course extends MY_Controller {
     public function edit_kanji($id = null)
     {
         if ($id != null) {
-            $kanji = $this->t_kanji->get_data_by_id($id);
+            if ($this->session->userdata('EDIT_KANJI')) {
+                $kanji = $this->session->userdata('EDIT_KANJI');
+                $this->session->unset_userdata('EDIT_KANJI');
+            } else {
+                $kanji = $this->t_kanji->get_data_by_id($id);
+            }
+
             $option = array();
             foreach ($this->t_course->get_total() as $course) {
                 $val = $course['ID'];
@@ -250,7 +270,13 @@ class Course extends MY_Controller {
     public function edit_volca($id = null)
     {
         if ($id != null) {
-            $volca = $this->t_volca->get_data_by_id($id);
+            if ($this->session->userdata('EDIT_VOLCA')) {
+                $volca = $this->session->userdata('EDIT_VOLCA');
+                $this->session->unset_userdata('EDIT_VOLCA');
+            } else {
+                $volca = $this->t_volca->get_data_by_id($id);
+            }
+
             $option = array();
             foreach ($this->t_course->get_total() as $course) {
                 $val = $course['ID'];
@@ -281,6 +307,7 @@ class Course extends MY_Controller {
             $list_of_errors = validate_load(Validation_rules::update_gram_rules());
             $this->session->set_userdata('list_of_errors', json_encode($list_of_errors));
             $this->session->set_userdata('error_mess_code', validation_errors());
+            $this->session->set_userdata('EDIT_GRAMMAR', $data);
             redirect('admin/course/edit_grammar/'.$id);
         }
     }
@@ -301,6 +328,7 @@ class Course extends MY_Controller {
             $list_of_errors = validate_load(Validation_rules::update_kanji_rules());
             $this->session->set_userdata('list_of_errors', json_encode($list_of_errors));
             $this->session->set_userdata('error_mess_code', validation_errors());
+            $this->session->set_userdata('EDIT_KANJI', $data);
             redirect('admin/course/edit_kanji/'.$id);
         }
     }
@@ -321,6 +349,7 @@ class Course extends MY_Controller {
             $list_of_errors = validate_load(Validation_rules::update_volca_rules());
             $this->session->set_userdata('list_of_errors', json_encode($list_of_errors));
             $this->session->set_userdata('error_mess_code', validation_errors());
+            $this->session->set_userdata('EDIT_VOLCA', $data);
             redirect('admin/course/edit_volca/'.$id);
         }
     }

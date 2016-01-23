@@ -11,7 +11,7 @@ Class T_admin extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->table_name = 'tbl_admin_users';
+        $this->table_name = 'admin';
     }
 
     public function get_data($user = null, $pass = null)

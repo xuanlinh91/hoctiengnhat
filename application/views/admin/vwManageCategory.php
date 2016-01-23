@@ -12,9 +12,9 @@ $this->load->view('admin/vwHeader');
             <div class="col-lg-12">
                 <h1>Category <small>Manage Category Module</small></h1>
                 <ol class="breadcrumb">
-                    <li><a href="category"><i class="icon-dashboard"></i> Category</a></li>
+                    <li><a href="category_list"><i class="icon-dashboard"></i> Category</a></li>
                     <li class="active"><i class="icon-file-alt"></i> List Category</li>
-                    <a href="<?php echo site_url('admin/category/create')?>" class="btn btn-primary"  style="float:right;">Add New Category</a>
+                    <a href="<?php echo site_url('admin/category/create_category')?>" class="btn btn-primary"  style="float:right;">Add New Category</a>
                     <div style="clear: both;"></div>
 
                 </ol>
@@ -41,11 +41,11 @@ $this->load->view('admin/vwHeader');
                     ?>
 
                     <tr>
-                        <td><?php echo $val['ID']; ?></td>
+                        <td><?php echo $val['ID_NAME']; ?></td>
                         <td><?php echo $val['CATEGORY']; ?></td>
                         <td><?php echo $val['PARENT']; ?></td>
-                        <td><a class="btn btn-info" href="<?php echo site_url('admin/category/edit').'/'.$val['ID']?>">Edit</a></td>
-                        <td><a class="btn btn-danger cate_delete" href="<?php echo site_url('admin/category/delete_cms').'/'.$val['ID']?>">Delete</a></td>
+                        <td><a class="btn btn-info <?php echo $val['DELETE'] != 0 ? "disabled" : "active"?>" href="<?php echo site_url('admin/category/edit_category').'/'.$val['ID']?>">Edit</a></td>
+                        <td><a class="btn btn-danger cate_delete <?php echo $val['DELETE'] != 0 ? "disabled" : "active"?>" href="<?php echo site_url('admin/category/delete_cate').'/'.$val['ID']?>">Delete</a></td>
                     </tr>
                     <?php
                 }

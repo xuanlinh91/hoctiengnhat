@@ -107,13 +107,14 @@ class Blog extends MY_Controller {
                 if (count($docs) != 0) {
                     $id = $list;
                     $blog = $this->t_blog->get_data_join_category($id);
-                    if (substr($blog['ID'], 0, 2) == 'DT') {
+                    if (substr($blog['ID_NAME'], 0, 2) == 'DT') {
                         $this->data['course'] = substr($blog['ID'], 2);
                         $this->data['blog'] = $blog;
                         $this->view('default', 'docs', $this->data);
 
                     }
 
+                } else {
                     redirect('blog/docs/list');
                 }
             }

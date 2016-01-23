@@ -221,16 +221,6 @@ class Validation_rules
     {
         $rules['add_user_rules'] = array(
             array(
-                'field' => 'USERNAME',
-                'label' => 'User name',
-                'rules' => 'trim|required|max_length[50]|form_validation_alpha'
-            ),
-            array(
-                'field' => 'PASSWORD',
-                'label' => 'Password',
-                'rules' => 'required'
-            ),
-            array(
                 'field' => 'FIRSTNAME',
                 'label' => 'Firstname',
                 'rules' => 'required'
@@ -247,6 +237,98 @@ class Validation_rules
             ),
         );
         return $rules['add_user_rules'];
+    }
+
+    public static function add_publisher_rules()
+    {
+        $rules['add_publisher_rules'] = array(
+            array(
+                'field' => 'first_name',
+                'label' => 'Firstname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'last_name',
+                'label' => 'Lastname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'email',
+                'label' => 'Email',
+                'rules' => 'required'
+            )
+        );
+
+        return $rules['add_publisher_rules'];
+    }
+
+    public static function edit_publisher_rules()
+    {
+        $rules['edit_publisher_rules'] = array(
+            array(
+                'field' => 'first_name',
+                'label' => 'Firstname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'last_name',
+                'label' => 'Lastname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'email',
+                'label' => 'Email',
+                'rules' => 'required'
+            )
+        );
+
+        return $rules['edit_publisher_rules'];
+    }
+
+    public static function edit_user_rules()
+    {
+        $rules['edit_user_rules'] = array(
+            array(
+                'field' => 'FIRSTNAME',
+                'label' => 'Firstname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'LASTNAME',
+                'label' => 'Lastname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'EMAIL',
+                'label' => 'Email',
+                'rules' => 'required'
+            ),
+        );
+        return $rules['edit_user_rules'];
+    }
+
+    public static function edit_category_rules()
+    {
+        $rules['edit_category_rules'] = array(
+            array(
+                'field' => 'CATEGORY',
+                'label' => 'Title',
+                'rules' => 'required'
+            )
+        );
+        return $rules['edit_category_rules'];
+    }
+
+    public static function create_category_rules()
+    {
+        $rules['create_category_rules'] = array(
+            array(
+                'field' => 'CATEGORY',
+                'label' => 'Title',
+                'rules' => 'required'
+            )
+        );
+        return $rules['create_category_rules'];
     }
 
 }

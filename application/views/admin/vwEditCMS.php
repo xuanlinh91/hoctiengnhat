@@ -1,10 +1,6 @@
 <?php
-$this->load->view('admin/vwHeader');
+    $this->load->view('admin/vwHeader');
 ?>
-    <!--
-    Author : Abhishek R. Kaushik
-    Downloaded from http://devzone.co.in
-    -->
 
     <script>
 

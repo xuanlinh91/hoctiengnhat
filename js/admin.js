@@ -139,6 +139,7 @@ jQuery(document).ready(function ($) {
         $('.progress-bar').html('');
         $('.progress-bar').css('width', '0%');
         $('.progress-bar').removeClass('progress-bar-success');
+        $('.upload-button').show();
         $('#upload_button').show();
         $('#upload_file').show();
         $(this).hide();

@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <h1>Category <small>Edit Category</small></h1>
                 <ol class="breadcrumb">
-                    <li><a href="<?php echo site_url('admin/cms'); ?>"><i class="icon-dashboard"></i> CMS</a></li>
+                    <li><a href="<?php echo site_url('admin/category/category_list'); ?>"><i class="icon-dashboard"></i> Category</a></li>
                     <li class="active"><i class="icon-file-alt"></i> Edit Category</li>
                 </ol>
             </div>
@@ -16,12 +16,13 @@
 
 
         <div class="fld">
-            <?php echo form_open('admin/cms/update_cms', array('class' => 'form-horizontal')); ?>
+            <?php echo form_open('admin/category/edit_submit', array('class' => 'form-horizontal')); ?>
             <div class="form-group">
+                <input type="hidden" class="form-control" value="<?php echo isset($category['ID']) && !empty($category['ID']) ? $category['ID'] : '';?>" name="ID">
                 <label class="control-label col-sm-3">ID</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input name="ID"  type="text" class="form-control" disabled value="<?php
-                    echo isset($category['ID']) && !empty($category['ID']) ? $category['ID'] : '';
+                    <input name="ID_NAME"  type="text" class="form-control" autofocus value="<?php
+                        echo isset($category['ID_NAME']) && !empty($category['ID_NAME']) ? $category['ID_NAME'] : '';
                     ?>">
                 </div>
             </div>
@@ -29,7 +30,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-3">Title</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input name="TITLE"  type="text" class="form-control" autofocus value="<?php
+                    <input name="CATEGORY"  type="text" class="form-control"  value="<?php
                     echo isset($category['CATEGORY']) && !empty($category['CATEGORY']) ? $category['CATEGORY'] : '';
                     ?>">
                 </div>
@@ -47,7 +48,7 @@
                     <input type="submit" name="btn_submit" class="btn btn-primary" value="Save">
                 </div>
                 <div class="col-sm-1col-md-1 col-lg-1">
-                    <a href="<?php echo site_url('admin/cms');?>" class="btn btn-info" >Cancel</a>
+                    <a href="<?php echo site_url('admin/category/category_list');?>" class="btn btn-info" >Cancel</a>
                 </div>
             </div>
             <?php echo form_close(); ?>

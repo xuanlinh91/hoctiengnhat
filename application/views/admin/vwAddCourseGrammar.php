@@ -37,7 +37,7 @@ $this->load->view('admin/vwHeader');
             <div class="form-group">
                 <label class="control-label col-sm-3">Lesson</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input class="form-control" value="" name="lesson">
+                    <input class="form-control" value="<?php echo isset($gram['lesson']) && !empty($gram['lesson']) ? $gram['lesson'] : '';?>" name="lesson">
                 </div>
             </div>
             <div class="form-group">
@@ -52,7 +52,7 @@ $this->load->view('admin/vwHeader');
                 <div class="col-sm-8 col-md-6 col-lg-8">
                     <textarea id="create_grammar" class="text-counter-js form-control" rows="50" cols="50" maxlength="4900" name="content">
                         <?php
-                        echo isset($gram['content']) && !empty($gram['content']) ? $gram['content'] : '';
+                            echo isset($gram['content']) && !empty($gram['content']) ? $gram['content'] : '';
                         ?>
                     </textarea>
                 </div>
@@ -61,7 +61,11 @@ $this->load->view('admin/vwHeader');
             <div class="form-group">
                 <label class="control-label col-sm-3">Content Preview</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <textarea class="text-counter-js form-control" rows="5" cols="10" maxlength="200" name="preview"></textarea>
+                    <textarea class="text-counter-js form-control" rows="5" cols="10" maxlength="200" name="preview">
+                        <?php
+                            echo isset($gram['content']) && !empty($gram['content']) ? $gram['content'] : '';
+                        ?>
+                    </textarea>
                 </div>
             </div>
 

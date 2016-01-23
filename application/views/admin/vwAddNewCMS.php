@@ -55,7 +55,7 @@ $this->load->view('admin/vwHeader');
             <div class="form-group">
                 <label class="control-label col-sm-3">Title</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input name="TITLE"  type="text" class="form-control" autofocus value=" <?php
+                    <input name="TITLE"  type="text" class="form-control" autofocus value="<?php
                     echo isset($cms['TITLE']) && !empty($cms['TITLE']) ? $cms['TITLE'] : '';
                     ?>">
                 </div>
@@ -81,18 +81,18 @@ $this->load->view('admin/vwHeader');
                     <img width="100px" id="thumb_img" height="100px" <?php echo $style;?>
                          src="<?php echo isset($cms['THUMB']) && !empty($cms['THUMB']) ? base_url($cms['THUMB']) : '';?>" />
                 </div>
-                <div class="col-lg-2" <?php echo $style;?>>
-                    <a href="" id="del_thumb" class="btn btn-danger" style="display: none;">Xóa thumbnail</a>
+                <div class="col-lg-2">
+                    <a href="" id="del_thumb" <?php echo $style;?>  class="btn btn-danger">Xóa thumbnail</a>
                 </div>
 
-                <input name="THUMB" id="thumb_link" type="hidden" class="form-control" value="<?php echo isset($cms['THUMB']) && !empty($cms['THUMB']) ? trim($cms['THUMB']) : '';?>">
+                <input name="THUMB" id="thumb_link" type="hidden" class="form-control" value="<?php echo isset($cms['THUMB_HIDDEN']) && !empty($cms['THUMB_HIDDEN']) ? trim($cms['THUMB_HIDDEN']) : '';?>">
                         <div id="upload_file" class="col-sm-8 col-md-6 col-lg-8" <?php echo $button;?>>
                             <input type="file" class="form-control" name="myfile" id="myfile">
                         </div>
 
             </div>
 
-            <div class="form-group" <?php echo $button;?>>
+            <div class="form-group upload-button" <?php echo $button;?>>
                 <div id="upload_button" class="col-lg-offset-3 col-lg-8">
                     <input type="button" class="btn btn-default" value="Upload" onclick="doUpload();"/>
                     <input type="button" class="btn btn-default" value="Cancle" onclick="cancleUpload();"/>

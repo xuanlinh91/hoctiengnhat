@@ -1,11 +1,6 @@
 <?php
 $this->load->view('admin/vwHeader');
 ?>
-    <!--
-    Author : Abhishek R. Kaushik
-    Downloaded from http://devzone.co.in
-    -->
-
     <div id="page-wrapper">
 
         <div class="row">
@@ -58,14 +53,14 @@ $this->load->view('admin/vwHeader');
             <div class="form-group">
                 <label class="control-label col-sm-3">Email</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input class="form-control" value="<?php echo isset($user['EMAIL']) && !empty($user['EMAIL']) ? $user['EMAIL'] : '';?>" name="EMAIL">
+                    <input class="form-control" type="email" value="<?php echo isset($user['EMAIL']) && !empty($user['EMAIL']) ? $user['EMAIL'] : '';?>" name="EMAIL">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-3">Gold</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
-                    <input class="form-control" value="<?php echo isset($user['GOLD']) && !empty($user['GOLD']) ? $user['GOLD'] : '';?>" name="GOLD">
+                    <input class="form-control" type="number" value="<?php echo isset($user['GOLD']) && !empty($user['GOLD']) ? $user['GOLD'] : '';?>" name="GOLD">
                 </div>
             </div>
 
@@ -78,7 +73,7 @@ $this->load->view('admin/vwHeader');
                         '0'    => 'Active',
                     );
 
-                    echo form_dropdown('status', $options, '0', 'class="form-control"');
+                    echo form_dropdown('STATUS', $options, isset($user['STATUS']) ? $user['STATUS'] : '0', 'class="form-control"');
                     ?>
                 </div>
             </div>

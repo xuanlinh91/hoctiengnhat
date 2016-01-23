@@ -23,9 +23,33 @@ Class T_blog extends CI_Model
         return ($query);
     }
 
+    public function get_total_publisher($id_publisher = null)
+    {
+        if ($id_publisher != NULL) {
+            $this->db->select("*");
+            $this->db->from($this->table_name);
+            $this->db->where('DELETE', 0);
+            $this->db->where('AUTHOR', $id_publisher);
+            $query = $this->db->get()->result_array();
+            return ($query);
+        } else {
+            return null;
+        }
+    }
+
     function list_all($number, $offset){
         $query =  $this->db->get($this->table_name,$number,$offset);
         return $query->result_array();
+    }
+
+    function list_all_publisher($id_publisher = null, $number, $offset){
+        if ($id_publisher != null) {
+            $this->db->where('AUTHOR', $id_publisher);
+            $query =  $this->db->get($this->table_name,$number,$offset);
+            return $query->result_array();
+        } else {
+            return null;
+        }
     }
 
     function blog_list_all($number, $offset){
@@ -56,8 +80,8 @@ Class T_blog extends CI_Model
     {
         $this->db->select("*, ");
         $this->db->from($this->table_name);
-        $this->db->join('category', 'blog.CATEGORY = category.ID');
-        $this->db->where('blog.ID', $id);
+//        $this->db->join('category', 'blog.CATEGORY = category.ID');
+        $this->db->where('ID', $id);
         $query = $this->db->get()->result_array();
         if (count($query) > 0) {
             return ($query[0]);
@@ -70,7 +94,7 @@ Class T_blog extends CI_Model
     {
         $this->db->select("*, category.CATEGORY as CATE_NAME");
         $this->db->from($this->table_name);
-        $this->db->join('category', 'blog.CATEGORY = category.ID');
+        $this->db->join('category', 'blog.CATEGORY = category.ID_NAME');
         $this->db->where('blog.ID', $id);
         $query = $this->db->get()->result_array();
         if (count($query) > 0) {

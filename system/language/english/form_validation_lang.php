@@ -96,3 +96,6 @@ $lang['form_validation_greater_than_equal_to']	= 'The {field} field must contain
 $lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your field name {field}.';
 $lang['form_validation_in_list']		= 'The {field} field must be one of: {param}.';
 $lang['custom_validate_name_user']		= '{field} Không được chứa ký tự đặc biệt';
+$lang['custom_validate_user_id']		= 'The {field} must only contain character, number and underscores';
+$lang['custom_validate_publisher_id']		= 'The {field} must only contain character, number and underscores';
+$lang['custom_validate_cate_id_name']		= 'The {field} must only contain uppercase character';

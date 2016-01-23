@@ -95,7 +95,7 @@ $type_mess_code = $this->session->userdata('type_mess_code');
                 <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='user' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/user/user_list');?>"><span class="glyphicon glyphicon-user"></span> Manage User</a></li><?php }?>
                 <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='publisher' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/publisher/publisher_list');?>"><span class="glyphicon glyphicon-user"></span> Manage Publisher</a></li><?php }?>
                 <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='course' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/course');?>"><span class="glyphicon glyphicon-th-list"></span> Manage Course</a></li><?php }?>
-                <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='category' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/category');?>"><span class="glyphicon glyphicon-th"></span> Manage Category</a></li><?php }?>
+                <?php if ($this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='category' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/category/category_list');?>"><span class="glyphicon glyphicon-th"></span> Manage Category</a></li><?php }?>
                 <?php if ($this->session->userdata('is_publisher_login') || $this->session->userdata('is_admin_login')) {?><li <?php echo  $pg =='profile' ? 'class="active"' : '' ?>><a href="<?php echo site_url('admin/home/profile');?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li><?php }?>
             </ul>
 

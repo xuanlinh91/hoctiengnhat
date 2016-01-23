@@ -23,14 +23,35 @@ Class T_category extends CI_Model
         return ($query);
     }
 
-    public function get_total_edit()
+    public function get_dropdown()
     {
         $this->db->select("*");
         $this->db->from($this->table_name);
         $this->db->where('DELETE', 0);
+        $this->db->where('PARENT', NULL);
+        $this->db->where('ID_NAME != ', 'AB');
+        $query = $this->db->get()->result_array();
+        return ($query);
+    }
+
+
+    public function get_total_edit()
+    {
+        $this->db->select("*");
+        $this->db->from($this->table_name);
         $this->db->where('ID !=', 'HB');
         $query = $this->db->get()->result_array();
         return ($query);
+    }
+
+    function set_data($data = array())
+    {
+        if (is_null($data) || !is_array($data)) {
+            return null;
+        }
+        $this->db->insert($this->table_name, $data);
+        $id = $this->db->insert_id();
+        return $id;
     }
 
     public function get_data($id = '')
@@ -39,7 +60,28 @@ Class T_category extends CI_Model
         $this->db->from($this->table_name);
         $this->db->where('ID', $id);
         $query = $this->db->get()->result_array();
-        return ($query[0]);
+        if (count($query)>0) {
+            return ($query[0]);
+        } else {
+            return null;
+        }
+    }
+
+    function update_data_by_id($data = array(), $id)
+    {
+        if (is_null($data) || !is_array($data)) {
+
+            return null;
+        }
+        $this->db->where('ID', $id);
+        $this->db->update($this->table_name, $data);
+        if ($this->db->affected_rows() > 0) {
+
+            return true;
+        } else {
+
+            return false;
+        }
     }
 
 

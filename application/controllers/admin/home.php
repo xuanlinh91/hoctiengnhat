@@ -34,7 +34,7 @@ class Home extends MY_Controller {
 
     public function index() {
         if ($this->session->userdata('is_admin_login')) {
-            redirect('admin/dashboard');
+            redirect('admin/cms/blog_list');
         } else {
             $this->load->view('admin/vwLogin');
         }
@@ -43,7 +43,7 @@ class Home extends MY_Controller {
     public function do_login() {
 
         if ($this->session->userdata('is_admin_login')) {
-            $this->redirect('admin', 'dashboard');
+            redirect('admin/cms/blog_list');
         } else {
             $user = $_POST['username'];
             $password = $_POST['password'];
@@ -70,6 +70,15 @@ class Home extends MY_Controller {
                     redirect('admin/cms');
                 } elseif(count($val2)>0) {
                     $recs = $val2[0];
+                    if ($recs['deleted'] != 'N') {
+                        $err['error'] = 'Your account has been deleted, please contact administrator';
+                        $this->load->view('admin/vwLogin', $err);
+                        return;
+                    } elseif ($recs['status'] != 0) {
+                        $err['error'] = 'Your account has been deactive, please contact administrator';
+                        $this->load->view('admin/vwLogin', $err);
+                        return;
+                    }
                     $this->session->set_userdata(array(
                             'id' => $recs['id'],
                             'username' => $recs['username'],
@@ -112,7 +121,7 @@ class Home extends MY_Controller {
             } else {
                 redirect('admin/home');
             }
-        } elseif($this->session->userdata('is_publishser_login')){
+        } elseif($this->session->userdata('is_publisher_login')){
             if($id!= null){
                 $result = $this->t_publisher->get_data_by_id($id);
                 $this->data['user'] = $result;
@@ -132,10 +141,12 @@ class Home extends MY_Controller {
         if ($data != null) {
             if ($this->session->userdata('is_admin_login')) {
                 $this->t_admin->update_data_by_id($data, $id);
+                $this->noti('Profile updated successfully!', 'success');
                 redirect('admin/home/profile');
             } elseif ($this->session->userdata('is_publisher_login')){
                 unset($data['username']);
                 $this->t_publisher->update_data_by_id($data, $id);
+                $this->noti('Profile updated successfully!', 'success');
                 redirect('admin/home/profile');
             }
         }
@@ -176,10 +187,19 @@ class Home extends MY_Controller {
                 unset($data['new_password']);
                 if ($this->session->userdata('is_admin_login')) {
                     $this->t_admin->update_data_by_id($data, $this->session->userdata['id']);
+                    $this->noti('Password changed!', 'error');
+                    redirect('admin/home/profile');
+
                 } elseif ($this->session->userdata('is_publisher_login')){
                     $this->t_publisher->update_data_by_id($data, $this->session->userdata['id']);
+                    $this->noti('Password changed!', 'error');
+                    redirect('admin/home/profile');
+
                 }
 
+            } else {
+                $this->noti('Wrong password!', 'error');
+                redirect('admin/home/change_password');
             }
 
         }

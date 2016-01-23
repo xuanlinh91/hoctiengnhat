@@ -12,7 +12,7 @@ $this->load->view('admin/vwHeader');
             <div class="col-lg-12">
                 <h1>User <small>Manage User Module</small></h1>
                 <ol class="breadcrumb">
-                    <li><a href="Users"><i class="icon-dashboard"></i> User</a></li>
+                    <li><a href="user_list"><i class="icon-dashboard"></i> User</a></li>
                     <li class="active"><i class="icon-file-alt"></i> List User</li>
                     <a href="<?php echo site_url('admin/user/add_user')?>" class="btn btn-primary" type="button" style="float:right;">Add New User</a>
                     <div style="clear: both;"></div>
@@ -31,6 +31,7 @@ $this->load->view('admin/vwHeader');
                     <th class="header">Email <i class="fa fa-sort"></i></th>
                     <th class="header">First Name <i class="fa fa-sort"></i></th>
                     <th class="header">Last Name <i class="fa fa-sort"></i></th>
+                    <th class="header">Status<i class="fa fa-sort"></i></th>
                     <th class="header">Action<i class="fa fa-sort"></i></th>
                     <th class="header">Delete<i class="fa fa-sort"></i></th>
                 </tr>
@@ -46,8 +47,11 @@ $this->load->view('admin/vwHeader');
                         <td><?php echo $val['EMAIL']; ?></td>
                         <td><?php echo $val['FIRSTNAME']; ?></td>
                         <td><?php echo $val['LASTNAME']; ?></td>
-                        <td><a class="btn btn-info" href="<?php echo site_url('admin/user/edit_user').'/'.$val['ID']?>">Edit</a></td>
-                        <td><a class="btn btn-danger user_delete" href="<?php echo site_url('admin/user/delete_user').'/'.$val['ID']?>">Delete</a></td>
+                        <td><?php echo $val['STATUS'] == 1 ? 'Ban' : "Active"; ?></td>
+                        <td><a class="btn btn-info <?php echo $val['DELETED'] != NULL ? "disabled" : "active"?>" href="<?php echo site_url('admin/user/edit_user').'/'.$val['ID']?>">Edit</a></td>
+                        <td><a class="btn btn-danger user_delete <?php echo $val['DELETED'] != NULL ? "disabled" : "active"?>" href="<?php echo site_url('admin/user/delete_user').'/'.$val['ID']?>">
+                                <?php echo $val['DELETED'] != NULL ? "Deleted" : "Delete"?>
+                            </a></td>
                     </tr>
                     <?php
                 }

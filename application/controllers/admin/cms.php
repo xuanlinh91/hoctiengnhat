@@ -20,41 +20,62 @@ class Cms extends MY_Controller {
     }
 
     public function index() {
-        $all_blog = $this->t_blog->get_total();
-        $this->data['data_cms'] = $all_blog;
-        $this->load->view('admin/vwManageCMS',$this->data);
-    }
+        redirect('admin/cms/blog_list');
+   }
 
     public function blog_list()
     {
-        $all_blog = $this->t_blog->get_total();
-        $config['base_url'] = base_url('index.php/admin/cms/blog_list');
-        $config['total_rows'] = count($all_blog);
-        $config['per_page'] = 10;
-        $config['uri_segment'] = 4;
-        $this->pagination->initialize($config);
-        $page_int = $this->uri->segment($config['uri_segment']);
-        $this->data['data_cms'] = $this->t_blog->list_all($config['per_page'], $page_int);
-        $this->view('default', 'admin/vwManageCMS', $this->data);
+        if ($this->session->userdata('is_admin_login')) {
+            $all_blog = $this->t_blog->get_total();
+            $config['base_url'] = base_url('index.php/admin/cms/blog_list');
+            $config['total_rows'] = count($all_blog);
+            $config['per_page'] = 10;
+            $config['uri_segment'] = 4;
+            $this->pagination->initialize($config);
+            $page_int = $this->uri->segment($config['uri_segment']);
+            $this->data['data_cms'] = $this->t_blog->list_all($config['per_page'], $page_int);
+            $this->view('default', 'admin/vwManageCMS', $this->data);
 
+        } elseif ($this->session->userdata('is_publisher_login')) {
+            $all_blog = $this->t_blog->get_total_publisher($this->session->userdata('id'));
+            $config['base_url'] = base_url('index.php/admin/cms/blog_list');
+            $config['total_rows'] = count($all_blog);
+            $config['per_page'] = 10;
+            $config['uri_segment'] = 4;
+            $this->pagination->initialize($config);
+            $page_int = $this->uri->segment($config['uri_segment']);
+            $this->data['data_cms'] = $this->t_blog->list_all_publisher($this->session->userdata('id'), $config['per_page'], $page_int);
+            $this->view('default', 'admin/vwManageCMS', $this->data);
+
+        }
     }
     public function edit($id='') {
         $this->set_page_title("Edit content");
+
         if($id!=''){
             $option = array();
             foreach ($this->t_category->get_total() as $cate) {
                 $val = $cate['ID'];
                 $option[$val] = $cate['CATEGORY'];
             }
-
             $this->data['cate_dropdown'] = $option;
             $result = $this->t_blog->get_data($id);
+            $this->data['cate_dropdown_checked'] = $result['CATEGORY'];
             $thumb = explode('/', $result['THUMB']);
             $result['THUMB_HIDDEN'] = end($thumb);
+
+            if ($this->session->userdata('EDIT_CONTENT')) {
+                foreach ($this->session->userdata('EDIT_CONTENT') as $key => $val) {
+                    $result[$key] = $val;
+                }
+
+                $this->session->unset_userdata('EDIT_CONTENT');
+            }
+
             $this->data['cms'] = $result;
             $this->data['cate_dropdown_checked'] = $result['CATEGORY'];
             $this->load->view('admin/vwEditCMS', $this->data);
-        }else{
+        } else {
             redirect('admin/cms');
         }
     }
@@ -67,30 +88,27 @@ class Cms extends MY_Controller {
             $option[$val] = $cate['CATEGORY'];
         }
         unset($option['AB']);
+        $this->data['cate_dropdown'] = $option;
+        $this->data['cate_dropdown_checked'] = DEFAULT_BLOG_CATEGORY;
 
         if ($this->session->userdata('CREATE_BLOG')) {
             $temp = $this->session->userdata('CREATE_BLOG');
+            $thumb = explode('/', $temp['THUMB']);
+            $temp['THUMB_HIDDEN'] = end($thumb);
             $this->data['cms'] = $temp;
-            if (isset($temp['THUMB'])) {
-            }
             $this->session->unset_userdata('CREATE_BLOG');
             $this->data['cate_dropdown_checked'] = $temp['CATEGORY'];
         }
 
-        $this->data['cate_dropdown'] = $option;
-        $this->data['cate_dropdown_checked'] = DEFAULT_BLOG_CATEGORY;
         $this->load->view('admin/vwAddNewCMS', $this->data);
     }
 
     public function create_submit() {
         $data = $this->input->post();
-        echo '<pre>';
-        var_dump($data);
-        exit;
-
         unset($data['ID']);
         unset($data['myfile']);
         unset($data['btn_submit']);
+
         $time = date("Y-m-d H:i:s");
         $data['DATETIME'] = $time;
 
@@ -147,6 +165,7 @@ class Cms extends MY_Controller {
             $list_of_errors = validate_load(Validation_rules::edit_blog_rules());
             $this->session->set_userdata('list_of_errors', json_encode($list_of_errors));
             $this->session->set_userdata('error_mess_code', validation_errors());
+            $this->session->set_userdata('EDIT_CONTENT', $data);
             redirect('admin/cms/edit/'.$id);
         }
     }
