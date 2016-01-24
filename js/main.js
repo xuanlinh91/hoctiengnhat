@@ -58,7 +58,7 @@ jQuery(document).ready(function ($) {
     //})
 
     setTimeout(function() {
-        $(".alert").slideUp();
+        $(".alert-auto").slideUp();
     }, 2000);
 
     $("#loginLink").click(function( event ){
@@ -94,6 +94,17 @@ jQuery(document).ready(function ($) {
     $("#link_back_btn").click(function(){
         var link = window.location.href;
         $("#link_back").val(link);
+    });
+
+    $(".paid-btn").click(function(){
+        var redirect_link = $(this).attr('href');
+        var removeConfirm = confirm('Bạn có chắc chắn muốn thanh toán để xem bài viết này?');
+        if (removeConfirm) {
+            window.location.href = redirect_link;
+        } else {
+            return false;
+        }
+
     });
 
 });

@@ -105,8 +105,15 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
+                        <label class="control-label col-sm-3">Fee</label>
+                        <div class="col-sm-8 col-md-6 col-lg-8">
+                            <input class="form-control" type="number" value="<?php echo isset($cms['FEE']) && !empty($cms['FEE']) ? $cms['FEE'] : '';?>" name="FEE">
+                        </div>
+                    </div>
+
+
+            <div class="form-group">
                                 <div class="col-lg-1 col-md-2 col-sm-2 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
                                     <input type="submit" name="btn_submit" class="btn btn-primary" value="Save">
                                 </div>

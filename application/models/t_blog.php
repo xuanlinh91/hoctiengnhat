@@ -180,21 +180,27 @@ Class T_blog extends CI_Model
         $this->db->where('CATEGORY', 'DTN5');
         $this->db->order_by('DATETIME', 'DESC');
         $query1 = $this->db->get()->result_array();
-        array_push($result, $query1[0]);
+        if (count($query1) > 0 ) {
+            array_push($result, $query1[0]);
+        }
         $this->db->select("ID, TITLE, CATEGORY, PREVIEW, THUMB");
         $this->db->from($this->table_name);
         $this->db->where('DELETE', '0');
         $this->db->where('CATEGORY', 'DTN4');
         $this->db->order_by('DATETIME', 'DESC');
         $query2 = $this->db->get()->result_array();
-        array_push($result, $query2[0]);
+        if (count($query2) > 0 ) {
+            array_push($result, $query2[0]);
+        }
         $this->db->select("ID, TITLE, CATEGORY, PREVIEW, THUMB");
         $this->db->from($this->table_name);
         $this->db->where('DELETE', '0');
         $this->db->where('CATEGORY', 'DTN3');
         $this->db->order_by('DATETIME', 'DESC');
         $query3 = $this->db->get()->result_array();
-        array_push($result, $query3[0]);
+        if (count($query3) > 0 ) {
+            array_push($result, $query3[0]);
+        }
         return ($result);
 
     }
@@ -255,21 +261,27 @@ Class T_blog extends CI_Model
         $this->db->where('CATEGORY', 'DTN5');
         $this->db->order_by('DATETIME', 'DESC');
         $query1 = $this->db->get()->result_array();
-        array_push($result, $query1[0]);
+        if (count($query1) > 0) {
+            array_push($result, $query1[0]);
+        }
         $this->db->select("ID, TITLE, CATEGORY");
         $this->db->from($this->table_name);
         $this->db->where('DELETE', '0');
         $this->db->where('CATEGORY', 'DTN4');
         $this->db->order_by('DATETIME', 'DESC');
         $query2 = $this->db->get()->result_array();
-        array_push($result, $query2[0]);
+        if (count($query2) > 0) {
+            array_push($result, $query2[0]);
+        }
         $this->db->select("ID, TITLE, CATEGORY");
         $this->db->from($this->table_name);
         $this->db->where('DELETE', '0');
         $this->db->where('CATEGORY', 'DTN3');
         $this->db->order_by('DATETIME', 'DESC');
         $query3 = $this->db->get()->result_array();
-        array_push($result, $query3[0]);
+        if (count($query3) > 0) {
+            array_push($result, $query3[0]);
+        }
         return ($result);
 
     }

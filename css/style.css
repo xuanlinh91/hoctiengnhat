@@ -405,3 +405,13 @@ form button:hover {
 #progressBar div {
     text-align: right;
 }
+
+.glyphicon-euro{
+    color: orange;
+    font-size: 16px;
+}
+
+.glyphicon-ok{
+    color: orange;
+    font-size: 24px;
+}

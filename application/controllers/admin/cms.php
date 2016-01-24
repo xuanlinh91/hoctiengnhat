@@ -55,7 +55,7 @@ class Cms extends MY_Controller {
         if($id!=''){
             $option = array();
             foreach ($this->t_category->get_total() as $cate) {
-                $val = $cate['ID'];
+                $val = $cate['ID_NAME'];
                 $option[$val] = $cate['CATEGORY'];
             }
             $this->data['cate_dropdown'] = $option;
@@ -84,7 +84,7 @@ class Cms extends MY_Controller {
         $this->set_page_title("Create new content");
         $option = array();
         foreach ($this->t_category->get_total() as $cate) {
-            $val = $cate['ID'];
+            $val = $cate['ID_NAME'];
             $option[$val] = $cate['CATEGORY'];
         }
         unset($option['AB']);

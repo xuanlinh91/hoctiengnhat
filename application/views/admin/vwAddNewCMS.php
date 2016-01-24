@@ -118,12 +118,21 @@ $this->load->view('admin/vwHeader');
                     <textarea id="create_cms" class="text-counter-js form-control" rows="50" cols="50" maxlength="4900" name="CONTENT"> <?php echo isset($cms['CONTENT']) && !empty($cms['CONTENT']) ? $cms['CONTENT'] : '';?></textarea>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-3">Content Preview</label>
                 <div class="col-sm-8 col-md-6 col-lg-8">
                     <textarea class="text-counter-js form-control" rows="5" cols="10" maxlength="200" name="PREVIEW"><?php echo isset($cms['PREVIEW']) && !empty($cms['PREVIEW']) ? trim($cms['PREVIEW']) : '';?></textarea>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3">Fee</label>
+                <div class="col-sm-8 col-md-6 col-lg-8">
+                    <input class="form-control" type="number" value="<?php echo isset($cms['FEE']) && !empty($cms['FEE']) ? $cms['FEE'] : '';?>" name="FEE">
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-lg-1 col-lg-offset-3">
                     <input type="submit" name="btn_submit" class="btn btn-primary" value="Create">

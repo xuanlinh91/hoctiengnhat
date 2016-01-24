@@ -331,4 +331,21 @@ class Validation_rules
         return $rules['create_category_rules'];
     }
 
+    public static function cash()
+    {
+        $rules['cash'] = array(
+            array(
+                'field' => 'card_seri',
+                'label' => 'Seri',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'card',
+                'label' => 'Card',
+                'rules' => 'required'
+            )
+        );
+        return $rules['cash'];
+    }
+
 }

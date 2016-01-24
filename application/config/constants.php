@@ -113,6 +113,7 @@ define('DEFAULT_THUMB_FOLDER','/uploads/');
 define('DEFAULT_THUMB','/uploads/default_thumb.png');
 define('DEFAULT_USER_PASSWORD','123456');
 define('DEFAULT_PUBLISHER_PASSWORD','123456');
+define('DEFAULT_GOLD','1000');
 
 
 

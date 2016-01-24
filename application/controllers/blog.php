@@ -8,6 +8,7 @@ class Blog extends MY_Controller {
         parent::__construct();
         $this->load->model('t_volca');
         $this->load->model('t_gram');
+        $this->load->model('t_user');
         $this->load->model('t_blog');
         $this->load->library('pagination');
         $this->load->helper('url');
@@ -44,11 +45,32 @@ class Blog extends MY_Controller {
         $this->view('default', 'docs', $this->data);
     }
 
+    public function paid($id = null)
+    {
+        if ($this->session->userdata('is_user_login')) {
+            $data_post = $this->t_blog->get_data_by_id($id);
+            $id_user = $this->session->userdata('id_user');
+            $data_user = $this->t_user->get_data_by_id($id_user);
+            if ($data_user['GOLD'] < $data_post['FEE']) {
+                $this->data['error'] = 'Số gold trong tài khoản hiện không đủ, vui lòng nạp thêm!';
+                $this->view('default', 'docs', $this->data);
+            } else {
+                $this->t_user->update_data_by_id(array('GOLD' => $data_user['GOLD'] - $data_post['FEE']), $id_user);
+                $paid_update = $data_post['PAID'].';'.$id_user;
+                $this->t_blog->update_data_by_id(array('PAID' => $paid_update), $id);
+                redirect('blog/docs/'.$id);
+            }
+        } else {
+            redirect('login/login');
+        }
+    }
+
     public function docs($list = null, $cate = null)
     {
         $this->set_page_title('Tài liệu - Đề thi');
         if ($list == 'list' && $cate != null) {
             $cate = strtoupper($cate);
+
             switch ($cate) {
                 case 'N5':
                     $cate_id = 'DTN5';
@@ -62,18 +84,6 @@ class Blog extends MY_Controller {
                 default :
                     $cate_id = 'DTN5';
                     break;
-            }
-
-            if (!$this->session->userdata('is_user_login')) {
-                $this->data['course'] = $cate;
-                $this->data['login'] = 'true';
-                $this->view('default', 'docs', $this->data);
-                return;
-            } else {
-                $this->data['course'] = $cate;
-                $this->data['pay'] = 'true';
-                $this->view('default', 'docs', $this->data);
-                return;
             }
 
             $total = count($this->t_blog->get_data_by_property('*', array('CATEGORY' => $cate_id)));
@@ -104,21 +114,43 @@ class Blog extends MY_Controller {
 
             } else {
                 $docs = $this->t_blog->get_data_by_id($list);
-                if (count($docs) != 0) {
-                    $id = $list;
-                    $blog = $this->t_blog->get_data_join_category($id);
-                    if (substr($blog['ID_NAME'], 0, 2) == 'DT') {
-                        $this->data['course'] = substr($blog['ID'], 2);
-                        $this->data['blog'] = $blog;
+
+                if (!$this->session->userdata('is_user_login')) {
+                    $this->data['course'] = $cate;
+                    $this->data['login'] = 'true';
+                    $this->view('default', 'docs', $this->data);
+                    return;
+                } else {
+                    $paid = $docs['PAID'];
+                    if ($paid === 0 || $paid === NULL) {
+                        $this->data['pay'] = 'true';
+                        $this->data['id_paid'] = $list;
                         $this->view('default', 'docs', $this->data);
+                        return;
+
+                    } elseif(count($paid) > 0) {
+                        $paid = explode(';',$paid);
+                        $result = array_search($this->session->userdata('id_user'), $paid);
+                        if ($result === FALSE) {
+                            $this->data['pay'] = 'true';
+                            $this->data['id_paid'] = $list;
+                            $this->view('default', 'docs', $this->data);
+                            return;
+                        } else {
+                            $id = $list;
+                            $blog = $this->t_blog->get_data_join_category($id);
+                            if (substr($blog['ID_NAME'], 0, 2) == 'DT') {
+                                $this->data['course'] = substr($blog['ID'], 2);
+                                $this->data['blog'] = $blog;
+                                $this->view('default', 'docs', $this->data);
+                            }
+                        }
 
                     }
 
-                } else {
-                    redirect('blog/docs/list');
                 }
-            }
 
+            }
         }
     }
 

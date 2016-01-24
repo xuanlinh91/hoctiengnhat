@@ -12,7 +12,7 @@ $this->load->view('admin/vwHeader');
             <div class="col-lg-12">
                 <h1>CMS <small>CMS Module</small></h1>
                 <ol class="breadcrumb">
-                    <li><a href="CMS"><i class="icon-dashboard"></i> CMS</a></li>
+                    <li><a href="blog_list"><i class="icon-dashboard"></i> CMS</a></li>
                     <li class="active"><i class="icon-file-alt"></i> List CMS</li>
                     <a href="<?php echo site_url('admin/cms/create')?>" class="btn btn-primary"  style="float:right;">Add New Blog</a>
                     <div style="clear: both;"></div>
