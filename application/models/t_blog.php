@@ -162,9 +162,10 @@ Class T_blog extends CI_Model
 
     public function get_last_home_more($limit = HOME_BLOG_NUM)
     {
-        $this->db->select("*");
+        $this->db->select("*,blog.ID as blog_id, b.ID as cate_id, b.CATEGORY, b.ID, b.ID_NAME, b.PARENT");
         $this->db->from($this->table_name);
-        $this->db->where('CATEGORY', 'PL');
+        $this->db->where('b.PARENT', 'BS');
+        $this->db->join('category as b', 'blog.CATEGORY = b.ID_NAME');
         $this->db->limit($limit);
         $this->db->order_by('DATETIME', 'desc');
         $query = $this->db->get()->result_array();

@@ -3,6 +3,7 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/application/config/constants.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/controllers/about.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/controllers/admin/category.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/controllers/admin/cms.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/controllers/admin/home.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/controllers/blog.php" charset="UTF-8" />
@@ -22,6 +23,7 @@
     <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourse.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourseKanji.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/admin/vwManageCourseVolca.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/views/blog_category.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/blog_template.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/cash.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application/views/change_password.php" charset="UTF-8" />

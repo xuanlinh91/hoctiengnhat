@@ -171,6 +171,15 @@ $this->session->unset_userdata('type_mess_code');
                             <ul class="dropdown-menu">
                                 <li><a href="<?php echo site_url('game');?>">Trò chơi</a></li>
                                 <li><a href="<?php echo site_url('blog/more');?>">Phụ lục</a></li>
+                                <?php
+                                if (isset($BS) && $BS != NULL) {
+                                    foreach ($BS as $key => $val) {
+                                        ?>
+                                        <li><a href="<?php echo site_url('blog/category/'.$val['ID_NAME']);?>"><?php echo $val['CATEGORY']?></a></li>
+                                        <?php
+                                    }
+                                }
+                                ?>
                             </ul>
                         </li>
                         <li>

@@ -78,7 +78,7 @@ include_once('share/header.php');
         <!-- START THE FEATURETTES -->
     <div class="container news">
         <ul class="nav nav-tabs" style="margin-bottom: 20px;">
-            <li class="active"><a href="<?php echo site_url('blog/blog/list')?>">Home</a></li>
+            <li class="active"><a href="<?php echo site_url('blog/category/HB')?>">Home</a></li>
         </ul>
 
         <?php
@@ -128,7 +128,7 @@ include_once('share/header.php');
         ?>
 
         <ul class="nav nav-tabs" style="margin-bottom: 20px;">
-            <li class="active"><a href="<?php echo site_url('blog/more')?>">Phụ lục</a></li>
+            <li class="active"><a href="<?php echo site_url('blog/more')?>">Bổ sung</a></li>
         </ul>
 
         <?php
@@ -140,7 +140,7 @@ include_once('share/header.php');
                         <img class="featurette-image img-responsive" alt="500x500" src="<?php echo base_url($more[$i]['THUMB']);?>">
                     </div>
                     <div class="col-md-8">
-                        <h4 class="featurette-heading"><a href="<?php echo site_url('blog').'/'.$more[$i]['ID'];?>"><?php echo $more[$i]['TITLE'];?></a></h4>
+                        <h4 class="featurette-heading"><a href="<?php echo site_url('blog').'/'.$more[$i]['blog_id'];?>"><?php echo $more[$i]['TITLE'];?></a></h4>
                         <p class="lead"><?php $prv = mb_substr($more[$i]['PREVIEW'],0,200); echo preg_replace('/([^\pL\.\ ]+)/u', '', strip_tags($prv));?></p>
                     </div>
 

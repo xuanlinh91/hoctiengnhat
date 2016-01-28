@@ -84,5 +84,37 @@ Class T_category extends CI_Model
         }
     }
 
+    public function get_all_bs()
+    {
+        $this->db->select("*");
+        $this->db->from($this->table_name);
+        $this->db->where('PARENT', 'BS');
+        $this->db->where('ID_NAME !=', 'TC');
+        $this->db->where('ID_NAME !=', 'PL');
+        $query = $this->db->get()->result_array();
+        if (count($query)>0) {
+            return ($query);
+        } else {
+            return null;
+        }
+
+    }
+
+    function get_data_by_property($select, $where = array())
+    {
+        if (!is_null($where) && is_array($where)) {
+            $this->db->where($where);
+            $this->db->where('DELETE', 0);
+        } else {
+            return null;
+        }
+        $this->db->select($select);
+        $query = $this->db->get($this->table_name);
+        $query =  $query->result_array();
+        if (count($query)>0) {
+            return $query[0];
+        } else return NULL;
+
+    }
 
 }

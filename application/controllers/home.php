@@ -29,9 +29,5 @@ class Home extends MY_Controller {
 		$this->view('default', 'home', $this->data);
 	}
 
-	public function abcd()
-	{
-		$this->view('default', 'abcd', $this->data);
-	}
 
 }

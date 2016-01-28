@@ -33,12 +33,7 @@ class Category extends MY_Controller {
         $this->load->view('admin/vwManageCategory',$this->data);
     }
     public function create_category() {
-        $option = array();
-        $option['BLANK'] = '';
-        foreach ($this->t_category->get_dropdown() as $cate) {
-            $val = $cate['ID_NAME'];
-            $option[$val] = $cate['CATEGORY'];
-        }
+        $option['BS'] = 'Phần bổ sung';
 
         $this->data['cate_dropdown'] = $option;
         if ($this->session->userdata('CREATE_CATEGORY')) {
@@ -60,14 +55,7 @@ class Category extends MY_Controller {
     public function edit_category($id) {
         $this->set_page_title("Edit Category");
         if($id !='' && $id != 'HB'){
-            $option = array();
-            $option['BLANK'] = '';
-            foreach ($this->t_category->get_dropdown() as $cate) {
-                if($cate['ID'] != $id && $cate['PARENT'] == null){
-                    $val = $cate['ID_NAME'];
-                    $option[$val] = $cate['CATEGORY'];
-                }
-            }
+            $option['BS'] = 'Phần bổ sung';
 
             $this->data['cate_dropdown'] = $option;
 

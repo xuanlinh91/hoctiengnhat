@@ -20,15 +20,60 @@ class Blog extends MY_Controller {
         $new_blog = $this->t_blog->list_all_new();
         $this->data['r_blog'] = $new_blog;
         $blog = $this->t_blog->get_data_join_category($id);
-        if ($blog != null) {
-            if (substr($blog['ID'], 0, 2) == 'DT') {
-                $this->data['course'] = substr($blog['ID'], 2);
+        $blog_title['TITLE'] = $blog['TITLE'];
+        $blog_title['FEE'] = $blog['FEE'];
+        $paid = $blog['PAID'];
+        if ($blog['FEE'] != 0 && $blog['FEE'] != NULL ) {
+            if (!$this->session->userdata('is_user_login')) {
+                if (substr($blog['ID'], 0, 2) == 'DT') {
+                    $this->data['course'] = substr($blog['ID'], 2);
+                }
+                $this->data['blog'] = $blog_title;
+                $this->data['login'] = 'true';
+                $this->view('default', 'blog_template', $this->data);
+                return;
             }
-            $this->data['blog'] = $blog;
-            $this->view('default', 'blog_template', $this->data);
+
+                if ($paid === 0 || $paid === NULL) {
+                $this->data['blog'] = $blog_title;
+                $this->data['pay'] = 'true';
+                $this->data['id_paid'] = $id;
+                $this->view('default', 'blog_template', $this->data);
+                return;
+
+            } elseif(count($paid) > 0) {
+                $paid = explode(';',$paid);
+                $result = array_search($this->session->userdata('id_user'), $paid);
+                if ($result === FALSE) {
+                    $this->data['blog'] = $blog_title;
+                    $this->data['pay'] = 'true';
+                    $this->data['id_paid'] = $id;
+                    $this->view('default', 'blog_template', $this->data);
+                    return;
+                } else {
+                    if ($blog != null) {
+                        if (substr($blog['ID'], 0, 2) == 'DT') {
+                            $this->data['course'] = substr($blog['ID'], 2);
+                        }
+                        $this->data['blog'] = $blog;
+                        $this->view('default', 'blog_template', $this->data);
+                    } else {
+                        redirect('blog/blog_list');
+                    }
+                }
+            }
         } else {
-            redirect('blog/blog_list');
+            if ($blog != null) {
+                if (substr($blog['ID'], 0, 2) == 'DT') {
+                    $this->data['course'] = substr($blog['ID'], 2);
+                }
+                $this->data['blog'] = $blog;
+                $this->view('default', 'blog_template', $this->data);
+            } else {
+                redirect('blog/blog_list');
+            }
         }
+
     }
 
     public function blog_list()
@@ -45,7 +90,7 @@ class Blog extends MY_Controller {
         $this->view('default', 'docs', $this->data);
     }
 
-    public function paid($id = null)
+    public function paid($id = null, $type = 'docs')
     {
         if ($this->session->userdata('is_user_login')) {
             $data_post = $this->t_blog->get_data_by_id($id);
@@ -56,9 +101,14 @@ class Blog extends MY_Controller {
                 $this->view('default', 'docs', $this->data);
             } else {
                 $this->t_user->update_data_by_id(array('GOLD' => $data_user['GOLD'] - $data_post['FEE']), $id_user);
+
                 $paid_update = $data_post['PAID'].';'.$id_user;
                 $this->t_blog->update_data_by_id(array('PAID' => $paid_update), $id);
-                redirect('blog/docs/'.$id);
+                if ($type == 'blog') {
+                    redirect('blog/'.$id);
+                } else {
+                    redirect('blog/docs/'.$id);
+                }
             }
         } else {
             redirect('login/login');
@@ -114,41 +164,53 @@ class Blog extends MY_Controller {
 
             } else {
                 $docs = $this->t_blog->get_data_by_id($list);
-
-                if (!$this->session->userdata('is_user_login')) {
-                    $this->data['course'] = $cate;
-                    $this->data['login'] = 'true';
-                    $this->view('default', 'docs', $this->data);
-                    return;
-                } else {
-                    $paid = $docs['PAID'];
-                    if ($paid === 0 || $paid === NULL) {
-                        $this->data['pay'] = 'true';
-                        $this->data['id_paid'] = $list;
+                if ($docs['FEE'] != 0 && $docs['FEE'] != NULL ) {
+                    if (!$this->session->userdata('is_user_login')) {
+                        $this->data['course'] = $cate;
+                        $this->data['login'] = 'true';
                         $this->view('default', 'docs', $this->data);
                         return;
-
-                    } elseif(count($paid) > 0) {
-                        $paid = explode(';',$paid);
-                        $result = array_search($this->session->userdata('id_user'), $paid);
-                        if ($result === FALSE) {
+                    } else {
+                        $paid = $docs['PAID'];
+                        if ($paid === 0 || $paid === NULL || $paid === "") {
                             $this->data['pay'] = 'true';
+                            $this->data['fee'] = $docs['FEE'];
                             $this->data['id_paid'] = $list;
                             $this->view('default', 'docs', $this->data);
                             return;
-                        } else {
-                            $id = $list;
-                            $blog = $this->t_blog->get_data_join_category($id);
-                            if (substr($blog['ID_NAME'], 0, 2) == 'DT') {
-                                $this->data['course'] = substr($blog['ID'], 2);
-                                $this->data['blog'] = $blog;
+
+                        } elseif(count($paid) > 0) {
+                            $paid = explode(';',$paid);
+                            $result = array_search($this->session->userdata('id_user'), $paid);
+                            if ($result == FALSE) {
+                                $this->data['pay'] = 'true';
+                                $this->data['fee'] = $docs['FEE'];
+                                $this->data['id_paid'] = $list;
                                 $this->view('default', 'docs', $this->data);
+                                return;
+                            } else {
+                                $id = $list;
+                                $blog = $this->t_blog->get_data_join_category($id);
+                                if (substr($blog['ID_NAME'], 0, 2) == 'DT') {
+                                    $this->data['course'] = substr($blog['ID'], 2);
+                                    $this->data['blog'] = $blog;
+                                    $this->view('default', 'docs', $this->data);
+                                }
                             }
+
                         }
 
                     }
-
+                } else {
+                    $id = $list;
+                    $blog = $this->t_blog->get_data_join_category($id);
+                    if (substr($blog['ID_NAME'], 0, 2) == 'DT') {
+                        $this->data['course'] = substr($blog['ID'], 2);
+                        $this->data['blog'] = $blog;
+                        $this->view('default', 'docs', $this->data);
+                    }
                 }
+
 
             }
         }
@@ -160,5 +222,15 @@ class Blog extends MY_Controller {
         $more = $this->t_blog->more_content();
         $this->data['data_get'] = $more;
         $this->view('default', 'more', $this->data);
+    }
+
+    public function category($id_name = null)
+    {
+        $cate = $this->t_category->get_data_by_property('*', array('ID_NAME' => $id_name));
+        $total = $this->t_blog->get_data_by_property('*', array('CATEGORY' => $id_name));
+        $this->data['cate'] = $cate['CATEGORY'];
+        $this->data['cate_id'] = $id_name;
+        $this->data['data_get'] = $total;
+        $this->view('default', 'blog_category', $this->data);
     }
 }
